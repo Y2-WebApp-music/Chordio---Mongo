@@ -1,0 +1,227 @@
+:root {
+
+/* Font family */
+    --font-main: 'Raleway';
+    --font-thai: 'Anuphan';
+
+    --font-weight-sma:300;
+    --font-weight-mid:500;
+    --font-weight-big:700;
+
+/* Color */
+    --color-bg : #151515;
+    --color-darkgray : #1d1d1d;
+    --color-midgray : #252525;
+    --color-lightgray : #2f2f2f;
+    --color-darkwhite : #3c3c3c;
+    --color-gray17 : #686868;
+    --color-blue : #5D60F5;
+    --color-red : #FF4054;
+    --color-lightblue : #7fd3ef;
+    --color-green : #1fa562;
+    --color-yellow : rgb(243, 174, 26) ;
+
+    --color-text : #e4e4e4;
+    --color-textgray : #aaaaaa;
+    --color-textblack : #141414;
+
+}
+img[src="data:image/png;base64,null"] {
+    display: none;
+}
+.prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+/* ======================================
+=========================================
+============= Pop-UP User ==============
+=========================================
+====================================== */
+#appicon {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-popup{
+    visibility: visible;
+    transform: translateX(100%);
+    transition: transform 0.2s ease-in-out;
+
+    background-color: var(--color-midgray);
+    position:fixed;
+    top: 55px;
+    right: 0px;
+    width: 300px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 1rem 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    border: solid;
+    border-radius: 10px;
+    border-width: 4px;
+    border-color: var(--color-darkwhite);
+    box-shadow: 0 0.05rem 0.25rem rgba(230, 230, 230, 0.25);
+}
+.user-icon, .user-img, .user-icon-post, .com-own-icon, .com-user-ico, .my-img, .com-user-icon, .comment-user-icon, .other-user-img {
+    border-radius: 50%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+}
+.user-icon:hover{
+    scale: 1.05;
+    border-radius: 100px;
+}
+.user-popup.visible {
+    transform: translateX(0);
+}
+.user-profile-popup{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    gap: 10px;
+    padding: 0.3rem 0.3rem;
+    background-color: var(--color-lightgray);
+    border: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: var(--color-darkwhite);
+    justify-items: start;
+    align-items: center;
+    transition: .2s;
+}
+.user-profile-popup img{
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+}
+.user-profile-popup:hover {
+    scale: 1.03;
+    background-color: var(--color-darkwhite);
+    transition: .2s;
+}
+
+.user-popup-btn{
+    width: 100%;
+    padding: 0.6rem 0.2rem;
+    border: none;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 15% 1fr;
+    align-items: center;
+    justify-items: start;
+    transition: .1s;
+}
+.user-popup-btn:hover{
+    background-color: var(--color-lightgray);
+    transition: .1s;
+}
+.user-popup-btn svg{
+    fill: var(--color-darkwhite);
+    transition: .2s;
+}
+.user-popup-btn:hover #chord-pop-btn{
+    fill: var(--color-blue);
+    transition: .2s;
+}
+.user-popup-btn:hover #save-pop-btn{
+    fill: var(--color-lightblue);
+    transition: .2s;
+}
+
+.user-popup-btn:hover #like-pop-btn{
+    fill: var(--color-red);
+    transition: .2s;
+}
+.user-popup-btn:hover #setting-pop-btn{
+    fill:var(--color-yellow);
+    transition: .2s;
+}
+.user-popup-btn:hover #logout-pop-btn{
+    fill:var(--color-red);
+    transition: .2s;
+}
+.popup-icon{
+    width: 100%;
+    /* padding: 0.2rem 0.9rem; */
+}
+
+/* ======================================
+=========================================
+=========== Delete pop-up ============
+=========================================
+====================================== */
+.logout-fill{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.654);
+    /* Display --> flex */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+}
+.logout-container{
+    width: 400px;
+    height: 180px;
+    padding: 0.1rem 0.1rem;
+    background-color: var(--color-darkgray);
+    border: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: var(--color-lightgray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.95);
+}
+.logout-bg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.logout-bg p{
+    font-size: 22px;
+}
+.btn-logout{
+    outline: none;
+    background: none;
+    margin-top: 3%;
+    padding: 0.6rem 4rem;
+    border: solid;
+    border-radius: 30px;
+    border-width: 2px;
+    transition: .2s;
+    border-color: var(--color-red);
+}
+.btn-logout:hover {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+    box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.95);
+    transition: .2s;
+    scale: 1.03;
+}
+
+.end-of-post{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.end-of-post p{
+    margin-bottom: 10px;
+    color: var(--color-lightgray);
+}

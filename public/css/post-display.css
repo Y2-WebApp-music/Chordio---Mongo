@@ -1,0 +1,1444 @@
+/* ======================================
+=========================================
+============= Make Post Display ==============
+=========================================
+====================================== */
+.make-post {
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    background-color: var(--color-darkgray);
+    padding: 0.4rem 1rem;
+    border: solid;
+    border-radius: 10px;
+    border-color: var(--color-midgray);
+    border-width: 2px;
+}
+.top-create-post {
+    display: grid;
+    grid-template-columns: 10% 80%;
+    gap: 5px ;
+    padding: 0.2rem 0.3rem;
+    min-height: 110px;
+}
+.top-create-post img {
+    width: 80%;
+    justify-self:start;
+    align-self:flex-start;
+}
+.top-create-post .post-text-input {
+    display: flex;
+    flex-direction: column;
+}
+.cr-post-title {
+    padding: 0.3rem 0.3rem;
+    width: 100%;
+    font-size: 22px;
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: var(--color-darkwhite);
+}
+.cr-post-detail{
+    margin-top: 1%;
+    padding: 0.3rem 0.3rem;
+    width: 100%;
+    min-height: 40px; /* Set a minimum height */
+    max-height: 1200px;
+    overflow-y: hidden;
+    resize: none;
+    background: none;
+    outline: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 16px;
+}
+
+.slideshow-wrapper {
+    display: flex;
+    justify-content: center; /* Center the slideshow and buttons horizontally */
+    align-items: center; /* Center vertically */
+    max-height: 400px;
+    margin-bottom: 1%;
+}
+
+.prev-button,
+.next-button {
+    flex: 0 0 20px; /* Adjust the width as needed */
+    cursor: pointer;
+    font-size: 18px;
+    padding: 2px;
+    text-align: center;
+}
+.arrow-hover{
+    fill: var(--color-darkwhite);
+    transition: .1s;
+}
+.prev-button:hover .arrow-hover ,.next-button:hover .arrow-hover{
+    fill: var(--color-lightblue);
+    transition: .1s;
+}
+
+.top-create-post .prev-button {
+    float: left; /* Float the "Previous" button to the left */
+}
+
+.top-create-post .next-button {
+    float: right; /* Float the "Next" button to the right */
+}
+
+/* Image input */
+.slideshow-left-right {
+    width: 100%;
+    text-align: center;
+    max-height: 400px;
+}
+.slide {
+    position: relative;
+    text-align: center;
+    height: 400px; /* Set a fixed height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Cancel button */
+.slideshow-left-right .slide .cancel-button {
+    position: absolute;
+    top: 5px;
+    right : 5px;
+    background-color: rgba(140, 140, 140, 0.5);
+    justify-self: center;
+    align-self: center;
+    border-radius: 40px;
+    height: 30px;
+    width: 30px;
+    padding: 0 0;
+    border: none;
+    cursor: pointer;
+}
+.cancel-button svg {
+    fill: white;
+    transition: fill 0.2s;
+}
+
+.cancel-button:hover svg {
+    fill: var(--color-red); /* Change to your desired color on hover */
+}
+
+/* Bottom filed */
+.bottom-create-post {
+    border: none;
+    border-top: solid;
+    border-width: 1px;
+    border-color: var(--color-lightgray);
+    padding-top: 9px;
+    display: grid;
+    grid-template-columns: 1fr 24% 21% 15%;
+}
+.bottom-create-post .lable-input-img{
+    width: min-content;
+}
+.bottom-create-post .camera{
+    fill: var(--color-gray17);
+    align-self: center;
+    transform: translateY(5px);
+}
+.bottom-create-post .lable-input-img:hover .camera{
+    scale: 1.05;
+    fill: var(--color-lightblue);
+}
+
+/* =================
+= custom-select =
+=================*/
+.pop-select-box {
+    position: relative;
+    display: block;
+    min-width: 95%;
+    justify-self: center;
+    align-self: center;
+    font-size: 15px;
+    color: #60666d;
+    background: none;
+    border: solid;
+    border-width: 1px;
+    border-color: var(--color-blue);
+    border-radius: 20px 20px 20px 20px;
+    transition: .2s;
+    z-index: 0;
+}
+.pop-select-box:hover {
+    scale: 1.03;
+    transition: .2s;
+    background-color: var(--color-blue);
+    z-index: 0;
+}
+.pop-select-box__current {
+    position: relative;
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+}
+.pop-select-box__current:focus + .pop-select-box__list {
+    opacity: 1;
+    -webkit-animation-name: none;
+            animation-name: none;
+}
+/* Focus area */
+.pop-select-box__current:focus + .pop-select-box__list .pop-select-box__option {
+    cursor: pointer;
+}
+.pop-select-box__current:focus .pop-select-box__icon {
+    -webkit-transform: translateY(-50%) rotate(180deg);
+            transform: translateY(-50%) rotate(180deg);
+}
+/* Arrow Down-Up -> Right filed */
+.pop-select-box__icon {
+    fill: white;
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    width: 20px;
+    opacity: 0.3;
+    transition: 0.2s ease;
+}
+.pop-select-box__value {
+    display: flex;
+}
+.pop-select-box__input {
+    display: none;
+}
+.pop-select-box__input:checked + .pop-select-box__input-text {
+    display: block;
+}
+.pop-select-box__input-text {
+    display: none;
+    width: 90%;
+    margin: 0;
+    padding: 4px;
+    padding-left: 10px;
+    background: none;
+    align-self: center;
+    font-size: 15px;
+}
+.pop-select-box__list {
+    position: absolute;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    -webkit-animation-name: HideList;
+            animation-name: HideList;
+    -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+    -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+    -webkit-animation-timing-function: step-start;
+            animation-timing-function: step-start;
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-darkgray);
+    border: solid;
+    border-width: 1px;
+    border-color: var(--color-blue);
+    border-radius: 0 0 20px 20px;
+    transform: translateX(-1px);
+    /* z-index: 1; */
+}
+.pop-select-box__option {
+    display: block;
+    padding: 10px;
+    background: none;
+    border-radius: 30px;
+    font-size: 16px;
+}
+.pop-select-box__option:hover, .pop-select-box__option:focus {
+    color: var(--color-lightblue);
+}
+@-webkit-keyframes HideList {
+    from {
+        -webkit-transform: scaleY(1);
+                transform: scaleY(1);
+    }
+    to {
+        -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+    }
+}
+@keyframes HideList {
+    from {
+        -webkit-transform: scaleY(1);
+                transform: scaleY(1);
+    }
+    to {
+        -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+    }
+}
+/* =================
+= custom-select =
+=================*/
+.pop-select-Post {
+    position: relative;
+    display: block;
+    justify-self: center;
+    align-self: center;
+    width: 95%;
+    font-size: 15px;
+    color: #60666d;
+    background: none;
+    border: solid;
+    border-width: 1px;
+    border-color: var(--color-blue);
+    /* background-color: aqua; */
+    border-radius: 20px 20px 20px 20px;
+    transition: .2s;
+    z-index: 0;
+}
+.pop-select-Post:hover {
+    scale: 1.03;
+    transition: .2s;
+    background-color: var(--color-blue);
+    z-index: 0;
+}
+.pop-select-post_current {
+    position: relative;
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+}
+.pop-select-post_current:focus + .pop-select-post_list {
+    opacity: 1;
+    -webkit-animation-name: none;
+            animation-name: none;
+}
+/* Focus area */
+.pop-select-post_current:focus + .pop-select-post_list .pop-select-post_option {
+    cursor: pointer;
+}
+.pop-select-post_current:focus .pop-select-post_icon {
+    -webkit-transform: translateY(-50%) rotate(180deg);
+            transform: translateY(-50%) rotate(180deg);
+}
+/* Arrow Down-Up -> Right filed */
+.pop-select-post_icon {
+    fill: white;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    width: 20px;
+    opacity: 0.3;
+    transition: 0.2s ease;
+}
+.pop-select-post_value {
+    display: flex;
+}
+.pop-select-post_input {
+    display: none;
+}
+.pop-select-post_input:checked + .pop-select-post_input-text {
+    display: block;
+}
+.pop-select-post_input-text {
+    display: none;
+    width: 90%;
+    margin: 0;
+    padding: 4px;
+    padding-left: 10px;
+    background: none;
+    align-self: center;
+    font-size: 16px;
+}
+.pop-select-post_list {
+    position: absolute;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    -webkit-animation-name: HideListPost;
+            animation-name: HideListPost;
+    -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+    -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+    -webkit-animation-timing-function: step-start;
+            animation-timing-function: step-start;
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-darkgray);
+    border: solid;
+    border-width: 1px;
+    border-color: var(--color-blue);
+    border-radius: 0 0 20px 20px;
+    transform: translateX(-1px);
+}
+.pop-select-post_option {
+    display: block;
+    padding: 10px;
+    background: none;
+    border-radius: 30px;
+    font-size: 16px;
+}
+.pop-select-post_option:hover, .pop-select-post_option:focus {
+    color: var(--color-lightblue);
+}
+@-webkit-keyframes HideListPost {
+    from {
+        -webkit-transform: scaleY(1);
+                transform: scaleY(1);
+    }
+    to {
+        -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+    }
+}
+@keyframes HideListPost {
+    from {
+        -webkit-transform: scaleY(1);
+                transform: scaleY(1);
+    }
+    to {
+        -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+    }
+}
+/* =================
+= custom-select =
+=================*/
+.make-post .bottom-create-post .post-btn {
+    width: 90%;
+    padding: 0.4rem 0rem;
+    justify-self: end;
+    align-self: center;
+    background: none;
+    border: solid;
+    transition: .2s;
+    border-width: 2px ;
+    border-color: var(--color-blue);
+    border-radius: 30px;
+    text-align: center;
+
+    font-size: 16px;
+}
+.make-post .bottom-create-post .post-btn:hover {
+    scale: 1.04;
+    background-color: var(--color-blue);
+    transition: .2s;
+}
+
+/* ======================================
+=========================================
+============= Post Display ==============
+=========================================
+====================================== */
+
+.post {
+    margin-top: 2%;
+    width: 90%;
+    background-color: var(--color-darkgray);
+    border: solid;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: var(--color-lightgray);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.post .post-user-information {
+    display: grid;
+    grid-template-columns: 8% 1fr 3%;
+    margin: 0.5rem 0.5rem;
+}
+.post .post-user-information .user-icon-post{
+    width: 80%;
+    justify-self: center;
+    align-self: center;
+}
+.post .post-user-information .post-user-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-top: 3px;
+}
+.post .post-user-information .post-user-text .post-username{
+    font-size: 18px;
+}
+.user-icon-post:hover{
+    scale: 1.03;
+}
+.user-icon-post:hover+.post-user-text .post-username{
+    text-decoration: underline;
+}
+.post-user-text > a{
+    text-decoration: none;
+}
+.post-user-text > a:hover{
+    text-decoration: underline;
+}
+.post .post-user-information .post-user-text .post-username:hover{
+    text-decoration: underline;
+}
+.post .post-user-information .post-user-text .post-date{
+    font-size: 14px;
+    color: var(--color-textgray);
+}
+.setting-post{
+    width: 100%;
+}
+.setting-btn {
+    position: relative;
+    fill: var(--color-darkwhite);
+    transition: .2s;
+}
+.setting-btn:hover {
+    fill: var(--color-lightblue);
+    transition: .2s;
+}
+.setting{
+    display: none;
+    position: absolute;
+    background-color: var(--color-midgray);
+    width: 180px;
+    transform: translateX(-184px);
+    padding: 0.4rem 7px;
+    border-radius: 10px;
+    border: none;
+    z-index: 6;
+    box-shadow: -2px -1px 6px 0px rgba(0, 0, 0, 0.75);
+}
+.setting-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 3px;
+    padding: 0.1rem 0.7rem ;
+    height: 40px;
+    padding: 0.3rem 0rem;
+    align-items: center;
+    justify-items: center;
+    transition: .2s;
+}
+.setting.active {
+    display: block;
+    z-index: 0;
+}
+.setting-grid:hover {
+    background-color: var(--color-darkwhite);
+    border-radius: 10px;
+    transition: .2s;
+}
+.setting-grid p {
+    justify-self: start;
+    font-size: 15px;
+    font-weight: var(--font-weight-mid);
+}
+.setting-grid svg{
+    fill: var(--color-gray17);
+    transition: .2s;
+}
+.setting-grid:hover .Edit-svg{
+    fill: var(--color-lightblue);
+    transition: .2s;
+}
+.setting-grid:hover .delete-svg{
+    fill: var(--color-red);
+    transition: .2s;
+}
+
+.post .post-content{
+    margin: 0rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.post .post-content .post-title {
+    font-size: 19px;
+    font-weight: var(--font-weight-mid);
+    margin: 3px;
+}
+.post .post-content .post-detail-text {
+    font-size: 15px;
+    font-weight: var(--font-weight-sma);
+    margin: 3px;
+}
+
+.post .post-content .post-img {
+    margin: 3px;
+    display: grid;
+    grid-template-areas: 'area area';
+    width: 100%;
+    grid-gap: 2px;
+    justify-items: center;
+    align-items: center;
+}
+.post-img img {
+    width: 100%;
+    min-height: 100%;
+    max-height: 400px;
+    object-fit:cover;
+    border: none;
+    border-radius: 6px;
+    justify-self: center;
+}
+.post-img img[src="data:image/png;base64,null"] {
+    display: none;
+}
+.post-img-1 {
+    grid-area: area;
+}
+
+.post-interact  {
+    display: flex;
+    flex-direction: row;
+    margin: 0.3rem 1rem;
+    gap: 9px;
+    border: none;
+    border-top: solid;
+    padding: 0.2rem 0;
+    border-width: 1px;
+    border-color: var(--color-darkwhite);
+    justify-content: start;
+    align-items: center;
+}
+.post-interact-btn {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+    padding: 0.3rem 0;
+    padding-right: 0.4rem;
+    /* padding-top: 1px; */
+    border: none;
+    border-radius: 7px;
+    transition: .2s;
+}
+.post-interact-btn:hover {
+    background-color: var(--color-lightgray);
+    transition: .2s;
+    scale: 1.04;
+}
+.post-interact-btn p {
+    margin: 0 0 ;
+    transform: translateY(2px);
+    z-index: 0;
+}
+.post-interact svg {
+    padding: 0.1rem 0.2rem;
+    padding-left: 0.5rem;
+    fill: var(--color-gray17);
+}
+.post-interact-btn:hover #comment-icon{
+    fill: var(--color-blue);
+    transition: .2s;
+}
+.post-interact-btn:hover #like-icon{
+    fill: var(--color-red);
+    transition: .2s;
+}
+.post-interact-btn:hover #save{
+    fill: var(--color-lightblue);
+    transition: .2s;
+}
+.like-button.active svg{
+    fill: var(--color-red);
+}
+.like-button.animated svg{
+    -webkit-animation: pop 0.9s both;
+    animation: pop 0.9s both;
+}
+.save-button.active svg{
+    fill: var(--color-lightblue);
+}
+.save-button.animated svg{
+    -webkit-animation: pop 0.9s both;
+    animation: pop 0.9s both;
+}
+@-webkit-keyframes pop {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes pop {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+/* ======================================
+=========================================
+=========== comment pop-up ============
+=========================================
+====================================== */
+.comment-fill{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.504);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+}
+.comment-container{
+    width: 70%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 95% 5%;
+    gap: 7px;
+    padding: 1rem 1rem;
+    justify-items: center;
+}
+.comment-container .comment-background{
+    width: 100%;
+    height: 700px;
+    background-color: var(--color-darkgray);
+    border: solid;
+    border-width: 2px;
+    border-color: var(--color-lightgray);
+    border-radius: 10px;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 60% 40%;
+    gap: 4px;
+}
+.com-left{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: black;
+    border-radius: 10px;
+}
+.com-post-img, .post-img, .Slide-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.Slide-img img{
+    height: 100%;
+    object-fit: contain;
+    border-radius: 30px;
+}
+.slide-button{
+    width: 100%;
+    height: 100%;
+    transform: translateY(-100%);
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+}
+.slide-left{
+    background-color: rgba(19, 19, 19, 0.387);
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 0.2rem 0.3rem 0.2rem 0;
+    justify-self: start;
+    fill: var(--color-text);
+    transition: .2s;
+}
+.slide-right{
+    background-color: rgba(19, 19, 19, 0.387);
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    padding: 0.2rem 0 0.2rem 0.3rem;
+    justify-self: end;
+    fill: var(--color-text);
+    transition: .2s;
+}
+.slide-right:hover ,.slide-left:hover{
+    scale: 1.05;
+    transition: .2s;
+}
+
+.com-right{
+    width: 98%;
+    height: 99%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 9% 83% 8%;
+}
+.com-post-own{
+    width: 100%;
+    position: sticky;
+    display: grid;
+    grid-template-columns: 9% 1fr;
+    margin: 0.0rem 0rem;
+    border: none;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: var(--color-textgray);
+}
+.com-own-icon{
+    width: 70%;
+    justify-self: center;
+    align-self: center;
+}
+.com-own-icon-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin: 10px;
+}
+.com-own-username{
+    font-size: 18px;
+}
+.com-own-date{
+    font-size: 14px;
+    color: var(--color-textgray);
+}
+.scroll-com{
+    width: 100%;
+    max-height: 600px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.com-post-title{
+    font-size: 20px;
+    font-weight: var(--font-weight-mid);
+    width: 100%;
+    padding: 5px 10px;
+}
+.com-post-detail{
+    font-size: 15px;
+    font-weight: var(--font-weight-sma);
+    border: none;
+    padding: 10px;
+}
+.scroll-com .post-interact {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-darkgray);
+    width: 100%;
+    margin: 0.3rem 0;
+}
+.comment-post {
+    display: grid;
+    grid-template-columns: 8% 92%;
+    gap: 1px;
+    height: auto;
+    width: 100%;
+    justify-items: center;
+    align-items: flex-start;
+    margin-bottom: 2%;
+}
+.comment-user-icon{
+    width: 90%;
+}
+.comment-context{
+    background-color: var(--color-lightgray);
+    width: 95%;
+    padding: 0.5rem 0.5rem;
+    border-radius: 20px;
+}
+.comment-username{
+    font-size: 18px;
+    font-weight: var(--font-weight-mid);
+}
+.comment-detail{
+    font-size: 15px;
+    padding-left: 8px;
+}
+
+.com-user-input{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    justify-items: center;
+    align-items: center;
+    border: none;
+    border-top: solid;
+    border-width: 1px ;
+    border-color: var(--color-lightgray);
+}
+.com-user-icon{
+    width: 65%;
+    padding: 0.2rem 0.2rem;
+    object-fit: contain;
+    justify-self: center;
+    align-self: center;
+}
+.com-input{
+    width: 95%;
+    height: 70%;
+    margin: 0 0;
+    padding: 0 0.4rem;
+    font-size: 16px;
+    color: var(--color-text);
+    background: none;
+    outline: none;
+    border: solid;
+    border-radius: 60px;
+    border-width: 2px;
+    border-color: var(--color-darkwhite);
+}
+.post-com-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+}
+.send-com-btn{
+    fill: var(--color-darkwhite);
+    transition: .2s;
+    rotate: 0deg;
+}
+.send-com-btn:hover{
+    fill: var(--color-blue);
+    transition: .2s;
+    rotate: 20deg;
+}
+.close-comment{
+    fill: var(--color-textgray);
+    justify-self: center;
+    background-color: var(--color-darkgray);
+    width: 35px;
+    height: 35px;
+    margin: 0.5rem 0.5rem;
+    border-radius: 100px;
+    border: solid;
+    border-width: 1px;
+    border-color: var(--color-midgray);
+    transition: .2s;
+}
+.close-comment:hover{
+    fill: var(--color-red);
+    transition: .2s;
+}
+/* Hide com-left when no Slide-img elements are found */
+.com-left.no-photos {
+    display: none;
+}
+/* Adjust the width of the comment container when no photos are present */
+.comment-fill .comment-container.no-photos {
+    width: 40%;
+}
+/* Change the grid template columns of comment-background */
+.comment-fill .comment-container.no-photos .comment-background {
+    grid-template-columns: 100%;
+    gap: 0px;
+}
+
+/* ======================================
+=========================================
+=========== Make Post pop-up ============
+=========================================
+====================================== */
+.pop-make-post {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin-top: 100px;
+    width: 45%;
+    height: auto;
+    background-color: var(--color-darkgray);
+    padding: 0.4rem 1rem;
+    border: solid;
+    border-radius: 10px;
+    border-color: var(--color-midgray);
+    border-width: 2px;
+}
+.pop-top-create-post {
+    display: grid;
+    grid-template-columns: 8% 86% 5%;
+    gap: 5px ;
+    padding: 0.2rem 0.3rem;
+    min-height: 110px;
+}
+.close-pop-cr-post {
+    justify-self: center;
+    padding-left: 10px;
+    fill: var(--color-text);
+    transition: .2s;
+}
+.close-pop-cr-post:hover {
+    fill: var(--color-red);
+    transition: .2s;
+}
+.pop-top-create-post img {
+    width: 80%;
+    justify-self:end;
+    align-self:flex-start;
+}
+.pop-top-create-post .pop-post-text-input {
+    display: flex;
+    flex-direction: column;
+}
+.pop-post-title {
+    padding: 0.3rem 0.3rem;
+    width: 100%;
+    font-size: 22px;
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: var(--color-darkwhite);
+}
+.pop-post-detail{
+    margin-top: 1%;
+    padding: 0.3rem 0.3rem;
+    width: 100%;
+    min-height: 80px;
+    /* max-height: 1200px; */
+    height: auto;
+    overflow-y: hidden;
+    /* resize: none; */
+    resize: vertical;
+    background: none;
+    outline: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 16px;
+}
+.pop-slideshow-wrapper {
+    display: flex;
+    justify-content: center; /* Center the slideshow and buttons horizontally */
+    align-items: center; /* Center vertically */
+    max-height: 400px;
+    margin-bottom: 1%;
+}
+.pop-prev-button,
+.pop-next-button {
+    flex: 0 0 20px; /* Adjust the width as needed */
+    cursor: pointer;
+    font-size: 18px;
+    padding: 2px;
+    text-align: center;
+}
+.pop-arrow-hover{
+    fill: var(--color-darkwhite);
+    transition: .1s;
+}
+.pop-prev-button:hover .arrow-hover ,.pop-next-button:hover .pop-arrow-hover{
+    fill: var(--color-lightblue);
+    transition: .1s;
+}
+
+.pop-prev-button {
+    float: left; /* Float the "Previous" button to the left */
+}
+
+.pop-next-button {
+    float: right; /* Float the "Next" button to the right */
+}
+/* Image input */
+.pop-slideshow-left-right {
+    width: 100%;
+    text-align: center;
+    max-height: 400px;
+}
+.pop-slide {
+    position: relative;
+    text-align: center;
+    height: 400px; /* Set a fixed height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pop-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Cancel button */
+.pop-slideshow-left-right .pop-slide .pop-cancel-button {
+    position: absolute;
+    top: 5px;
+    right : 5px;
+    background-color: rgba(140, 140, 140, 0.5);
+    justify-self: center;
+    align-self: center;
+    border-radius: 40px;
+    height: 30px;
+    width: 30px;
+    padding: 0 0;
+    border: none;
+    cursor: pointer;
+}
+.pop-cancel-button svg {
+    fill: white;
+    transition: fill 0.2s;
+}
+
+.pop-cancel-button:hover svg {
+    fill: var(--color-red); /* Change to your desired color on hover */
+}
+/*  Bottom Create pop Post */
+.pop-bottom-cr-post {
+    border: none;
+    border-top: solid;
+    border-width: 1px;
+    border-color: var(--color-lightgray);
+    padding-top: 9px;
+    display: grid;
+    grid-template-columns: 1fr 24% 21% 15%;
+}
+.pop-bottom-cr-post .pop-lable-input-img{
+    width: min-content;
+}
+.pop-bottom-cr-post .camera{
+    fill: var(--color-gray17);
+    align-self: center;
+    transform: translateY(5px);
+}
+.pop-bottom-cr-post .pop-lable-input-img:hover .pop-camera{
+    scale: 1.05;
+    fill: var(--color-lightblue);
+}
+.pop-post-btn {
+    width: 90%;
+    padding: 0.4rem 0rem;
+    justify-self: end;
+    align-self: center;
+    background: none;
+    border: solid;
+    transition: .2s;
+    border-width: 2px ;
+    border-color: var(--color-blue);
+    border-radius: 30px;
+    text-align: center;
+
+    font-size: 16px;
+}
+.pop-post-btn:hover {
+    scale: 1.04;
+    background-color: var(--color-blue);
+    transition: .2s;
+}
+/* =================
+= custom-select =
+=================*/
+.select-box {
+    position: relative;
+    display: block;
+    min-width: 95%;
+    justify-self: center;
+    align-self: center;
+    font-size: 15px;
+    color: #60666d;
+    background: none;
+    border: solid;
+    border-width: 1px;
+    border-color: var(--color-blue);
+    border-radius: 20px 20px 20px 20px;
+    transition: .2s;
+}
+.select-box:hover {
+    scale: 1.03;
+    transition: .2s;
+    background-color: var(--color-blue);
+    z-index: 5;
+}
+.select-box__current {
+    position: relative;
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+}
+.select-box__current:focus + .select-box__list {
+    opacity: 1;
+    -webkit-animation-name: none;
+            animation-name: none;
+}
+/* Focus area */
+.select-box__current:focus + .select-box__list .select-box__option {
+    cursor: pointer;
+}
+.select-box__current:focus .select-box__icon {
+    -webkit-transform: translateY(-50%) rotate(180deg);
+            transform: translateY(-50%) rotate(180deg);
+}
+/* Arrow Down-Up -> Right filed */
+.select-box__icon {
+    fill: white;
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    width: 20px;
+    opacity: 0.3;
+    transition: 0.2s ease;
+}
+.select-box__value {
+    display: flex;
+}
+.select-box__input {
+    display: none;
+}
+.select-box__input:checked + .select-box__input-text {
+    display: block;
+}
+.select-box__input-text {
+    display: none;
+    width: 90%;
+    margin: 0;
+    padding: 4px;
+    padding-left: 10px;
+    background: none;
+    align-self: center;
+    font-size: 15px;
+    z-index: 0;
+}
+.select-box__list {
+    position: absolute;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    -webkit-animation-name: HideList;
+            animation-name: HideList;
+    -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+    -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+    -webkit-animation-timing-function: step-start;
+            animation-timing-function: step-start;
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-darkgray);
+    border: solid;
+    border-width: 1px;
+    border-color: var(--color-blue);
+    border-radius: 0 0 20px 20px;
+    transform: translateX(-1px);
+    /* z-index: 1; */
+}
+.select-box__option {
+    display: block;
+    padding: 10px;
+    background: none;
+    border-radius: 30px;
+    font-size: 16px;
+}
+.select-box__option:hover, .select-box__option:focus {
+    color: var(--color-lightblue);
+}
+@-webkit-keyframes HideList {
+    from {
+        -webkit-transform: scaleY(1);
+                transform: scaleY(1);
+    }
+    to {
+        -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+    }
+}
+@keyframes HideList {
+    from {
+        -webkit-transform: scaleY(1);
+                transform: scaleY(1);
+    }
+    to {
+        -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+    }
+}
+/* =================
+= custom-select =
+=================*/
+.select-Post {
+    position: relative;
+    display: block;
+    justify-self: center;
+    align-self: center;
+    width: 95%;
+    font-size: 15px;
+    color: #60666d;
+    background: none;
+    border: solid;
+    border-width: 1px;
+    border-color: var(--color-blue);
+    /* background-color: aqua; */
+    border-radius: 20px 20px 20px 20px;
+    transition: .2s;
+}
+.select-Post:hover {
+    scale: 1.03;
+    transition: .2s;
+    background-color: var(--color-blue);
+}
+.select-post_current {
+    position: relative;
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+}
+.select-post_current:focus + .select-post_list {
+    opacity: 1;
+    -webkit-animation-name: none;
+            animation-name: none;
+}
+/* Focus area */
+.select-post_current:focus + .select-post_list .select-post_option {
+    cursor: pointer;
+}
+.select-post_current:focus .select-post_icon {
+    -webkit-transform: translateY(-50%) rotate(180deg);
+            transform: translateY(-50%) rotate(180deg);
+}
+/* Arrow Down-Up -> Right filed */
+.select-post_icon {
+    fill: white;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    width: 20px;
+    opacity: 0.3;
+    transition: 0.2s ease;
+}
+.select-post_value {
+    display: flex;
+}
+.select-post_input {
+    display: none;
+}
+.select-post_input:checked + .select-post_input-text {
+    display: block;
+}
+.select-post_input-text {
+    display: none;
+    width: 90%;
+    margin: 0;
+    padding: 4px;
+    padding-left: 10px;
+    background: none;
+    align-self: center;
+    font-size: 16px;
+}
+.select-post_list {
+    position: absolute;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    -webkit-animation-name: HideListPost;
+            animation-name: HideListPost;
+    -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+    -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+    -webkit-animation-timing-function: step-start;
+            animation-timing-function: step-start;
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-darkgray);
+    border: solid;
+    border-width: 1px;
+    border-color: var(--color-blue);
+    border-radius: 0 0 20px 20px;
+    transform: translateX(-1px);
+}
+.select-post_option {
+    display: block;
+    padding: 10px;
+    background: none;
+    border-radius: 30px;
+    font-size: 16px;
+}
+.select-post_option:hover, .select-post_option:focus {
+    color: var(--color-lightblue);
+}
+@-webkit-keyframes HideListPost {
+    from {
+        -webkit-transform: scaleY(1);
+                transform: scaleY(1);
+    }
+    to {
+        -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+    }
+}
+@keyframes HideListPost {
+    from {
+        -webkit-transform: scaleY(1);
+                transform: scaleY(1);
+    }
+    to {
+        -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+    }
+}
+/* =================
+= custom-select =
+=================*/

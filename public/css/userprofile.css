@@ -1,0 +1,616 @@
+* {
+    margin: 0 0;
+    padding: 0 0;
+    color: var(--color-text);
+    font-family: var(--font-thai),var(--font-main);
+    font-weight: var(--font-weight-sma);
+}
+body {
+    background-color: var(--color-bg);
+}
+
+/* ======================================
+=========================================
+=============== head Zone ===============
+=========================================
+====================================== */
+header {
+    background-color: var(--color-darkgray);
+    height: 42px;
+    width: 100%;
+    position: fixed;
+    box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.95);
+    padding-top: 7px;
+    padding-bottom: 4px;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: var(--color-lightgray);
+    z-index:10 ;
+}
+.headin {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.appname{
+    margin-left: 2%;
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    align-items: center;
+}
+
+#appicon {
+    height: 40px;
+}
+
+nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+.home-bg {
+    width: 90%;
+    height: 100%;
+    margin: 0 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px;
+    border: none;
+    border-radius: 10px;
+}
+nav .home-bg .home-icon {
+    fill :var(--color-gray17);
+}
+.home-bg:hover {
+    background-color: var(--color-lightgray);
+}
+
+.song-bg {
+    width: 90%;
+    height: 100%;
+    margin: 0 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px;
+    border: none;
+    border-radius: 10px;
+}
+nav .song-bg .song-icon {
+    fill :var(--color-gray17);
+}
+.song-bg:hover {
+    background-color: var(--color-lightgray);
+}
+
+.user-head {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-right: 2%;
+}
+.user-head .user-icon {
+    height: 40px;
+}
+
+.container {
+    width: auto;
+    background-color: var(--color-bg);
+    padding-top: 60px;
+    display: grid;
+    grid-template-columns: 30% 1fr 28%;
+    justify-items: center;
+}
+
+/* ======================================
+=========================================
+=============== Left Zone ===============
+=========================================
+====================================== */
+.left-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: sticky;
+    top: 90px;
+    height: 100vh;
+}
+.userprofile {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.userprofile img {
+    margin: 5px 5px;
+    width: 30%;
+}
+.user-information{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+}
+.user-information .user-name{
+    font-size: 30px;
+    font-weight: var(--font-weight-mid);
+}
+.user-information .user-sub{
+    font-size: 15px;
+    font-weight: var(--font-weight-sma);
+    color: var(--color-textgray);
+}
+.user-status {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-bottom: 6%;
+}
+.user-gray {
+    color: var(--color-textgray);
+}
+.action-btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 60%;
+    border: solid;
+    border-width: 1px;
+    border-color: var(--color-lightgray);
+    border-radius: 20px;
+    padding: 1rem 1rem;
+    margin: 0.5rem 0.1rem;
+    transition: .2s;
+}
+.action-btn:hover{
+    scale: 1.03;
+    background-color: var(--color-lightgray);
+    transition: .2s;
+}
+.save-btn{
+    fill: var(--color-darkwhite);
+    width: 40px;
+}
+.action-btn:hover .save-btn{
+    fill: var(--color-lightblue);
+}
+
+.like-btn{
+    fill: var(--color-darkwhite);
+    width: 40px;
+}
+.action-btn:hover .like-btn{
+    fill: var(--color-red);
+}
+
+.follow-btn{
+    fill: var(--color-darkwhite);
+    width: 40px;
+}
+.action-btn:hover .follow-btn{
+    fill: var(--color-green);
+}
+
+
+/* ======================================
+=========================================
+=============== Mid Zone ================
+=========================================
+====================================== */
+
+.mid-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    margin-top: 2%;
+}
+.post-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.end-of-post{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.end-of-post p{
+    margin-bottom: 10px;
+    color: var(--color-lightgray);
+}
+
+/* ======================================
+=========================================
+============== Right Zone ===============
+=========================================
+====================================== */
+.right-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: sticky;
+    top: 60px;
+    height: 100vh;
+}
+.your-chord-side{
+    margin-top: 2%;
+    width: 80%;
+    background-color: var(--color-darkgray);
+    height: 80%;
+    padding: 1rem 1rem;
+    border: solid;
+    border-width: 2px;
+    border-color: var(--color-lightgray);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.text-your-chord {
+    text-align: center;
+    justify-self: center;
+    padding: 0.3rem 6rem;
+    border: none;
+    border-bottom: solid;
+    border-color: var(--color-lightgray);
+    border-width: 1px;
+    font-weight: var(--font-weight-big);
+    font-size: 20px;
+}
+.scroll-over{
+    overflow-y:scroll;
+    overflow-x: hidden;
+}
+.your-chord-list {
+    width: 100%;
+    min-height: 90%;
+    max-height: 90%;
+    padding: 0.2rem 0.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.your-chord{
+    position: relative;
+    margin-top: 10px;
+    width: 90%;
+    min-height: 120px;
+    height: 120px;
+    background-color: var(--color-lightgray);
+    display: grid;
+    grid-template-columns: 20% 1fr ;
+    grid-template-rows: auto;
+    border-radius: 10px;
+    border: solid;
+    border-color: var(--color-darkwhite);
+    border-width: 1px;
+    transition: .1s;
+}
+.your-chord:hover {
+    background-color: var(--color-darkwhite);
+    scale: 1.02;
+    transition: .1s;
+}
+.your-chord:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    backdrop-filter: blur(2px);
+    pointer-events: none;
+}
+.hover-chord{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 120px;
+    height: 120px;
+    border-radius: 10px;
+    background-color: rgba(92, 92, 92, 0.52);
+    display: none;
+    grid-template-columns: 23% 54% 23%;
+    align-items: center;
+}
+.your-chord:hover .hover-chord {
+    display: grid;
+}
+.hover-chord-center {
+    width: 100%;
+    height: 100%;
+}
+.edit-chord{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-left: 10px;
+    border: none;
+    border-right: solid;
+    border-width: 1px;
+    padding: 1rem 0;
+    border-color: var(--color-text);
+}
+.edit-chord p{
+    display: block;
+    font-size: 14px;
+    font-weight: var(--font-weight-mid);
+}
+.edit-icon{
+    fill: var(--color-text);
+    padding: 0.6rem 0.6rem;
+    margin-right: 4px;
+    border-radius: 10px;
+    transition: .2s;
+}
+.edit-icon:hover{
+    fill: var(--color-lightblue);
+    background-color: rgba(56, 56, 56, 0.525);
+    height: 2em;
+    transition: .2s;
+}
+.edit-icon:hover+p {
+    display: block;
+    color: var(--color-lightblue);
+    text-align: center;
+}
+.delete-chord{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-right: 10px;
+    border: none;
+    border-left: solid;
+    border-width: 1px;
+    padding: 1rem 0;
+    border-color: var(--color-text);
+}
+.delete-chord p{
+    display: block;
+    font-size: 14px;
+    font-weight: var(--font-weight-mid);
+}
+.delete-icon{
+    fill: var(--color-text);
+    padding: 0.6rem 0.6rem;
+    margin-left: 4px;
+    border-radius: 10px;
+    transition: .2s;
+}
+.delete-icon:hover{
+    fill: var(--color-red);
+    background-color: rgba(56, 56, 56, 0.425);
+    height: 2em;
+    transition: .2s;
+}
+.delete-icon:hover+p {
+    display: block;
+    color: var(--color-red);
+}
+.your-chord img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.your-chord .your-chord-imformation{
+    margin-left: 2%;
+    margin-top: 1%;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.your-chord-imformation .your-chord-top p{
+    width: 100%;
+    max-height: 80px; /* Set the maximum height to 2 lines */
+    display: -webkit-box; /* For WebKit-based browsers */
+    -webkit-line-clamp: 2; /* Limit the number of displayed lines to 2 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 20px;
+    font-weight: var(--font-weight-mid);
+    text-overflow: ellipsis;
+}
+.your-chord-down {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap :4px;
+    padding-bottom: 3%;
+}
+.your-chord-down-grid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+}
+.your-chord-text-down{
+    font-weight: var(--font-weight-mid);
+    color: var(--color-textgray);
+    font-size: 13px;
+    height: 1em;
+    justify-self: center;
+    align-self: flex-end;
+}
+.your-chord-text-down-get {
+    font-size: 17px;
+    width: 90%;
+    height: 1em;
+    display: -webkit-box; /* For WebKit-based browsers */
+    -webkit-line-clamp: 1; /* Limit the number of displayed lines to 2 */
+    -webkit-box-orient: vertical;
+    justify-self: center;
+    align-self: flex-end;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.create-chord {
+    margin-top: 2%;
+    width: 40%;
+    padding: 0.4rem 1rem;
+
+    text-align: center;
+    align-self: center;
+    background-color: var(--color-lightgray);
+
+    border-radius: 50px;
+    border: solid;
+    border-width: 3px;
+    border-color: var(--color-blue);
+
+    font-size: 20px;
+    font-weight: var(--font-weight-big);
+    transition: .1s;
+}
+.create-chord:hover {
+    background-color: var(--color-blue);
+    scale: 1.03;
+    transition: .1s;
+}
+
+/* ======================================
+=========================================
+=========== Delete pop-up ============
+=========================================
+====================================== */
+.delete-fill{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.654);
+    /* Display --> flex */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+}
+.delete-container{
+    width: 400px;
+    height: 180px;
+    padding: 0.1rem 0.1rem;
+    background-color: var(--color-darkgray);
+    border: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: var(--color-lightgray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.95);
+}
+.del-bg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.del-bg p{
+    font-size: 22px;
+}
+.btn-contain{
+    width: 100%;
+    margin-top: 10%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.btn-delete, .btn-no{
+    outline: none;
+    background: none;
+    padding: 0.6rem 1rem;
+    border: solid;
+    border-radius: 30px;
+    border-width: 2px;
+    transition: .2s;
+}
+#notdel-btn{
+    border-color: var(--color-green);
+}
+#notdel-btn:hover {
+    background-color: var(--color-green);
+    border-color: var(--color-green);
+    box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.95);
+    transition: .2s;
+    scale: 1.03;
+}
+#del-btn{
+    border-color: var(--color-red);
+}
+#del-btn:hover {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+    box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.95);
+    transition: .2s;
+    scale: 1.03;
+}
+/* ======================================
+=========================================
+=========== Responsive screen ============
+=========================================
+====================================== */
+
+@media  screen and (max-width: 1190px) {
+    .container {
+        grid-template-columns: 40% 1fr;
+    }
+    .right-container{
+        display: none;
+    }
+    .search-post {
+        width: 80%;
+    }
+}
+@media  screen and (max-height: 750px) {
+    .userprofile{
+        display: none;
+    }
+}
+
+@media  screen and (max-width: 820px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    .right-container{
+        display: none;
+    }
+    .left-container{
+        display: none;
+    }
+}
+

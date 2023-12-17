@@ -1,0 +1,373 @@
+* {
+    margin: 0 0;
+    padding: 0 0;
+    color: var(--color-text);
+    font-family: var(--font-thai);
+    font-weight: var(--font-weight-sma);
+}
+body {
+    background-color: var(--color-bg);
+}
+
+/* ======================================
+=========================================
+=============== head Zone ===============
+=========================================
+====================================== */
+header {
+    background-color: var(--color-darkgray);
+    height: 42px;
+    width: 100%;
+    position: fixed;
+    box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.95);
+    padding-top: 7px;
+    padding-bottom: 4px;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: var(--color-lightgray);
+    z-index:10 ;
+}
+.headin {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.appname{
+    margin-left: 2%;
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    align-items: center;
+}
+
+#appicon {
+    height: 40px;
+}
+
+nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+.song-bg {
+    width: 90%;
+    height: 100%;
+    margin: 0 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    border-width: 3px;
+}
+nav .song-bg .song-icon {
+    fill :var(--color-gray17);
+}
+.song-bg:hover {
+    background-color: var(--color-lightgray);
+}
+.home-bg {
+    width: 90%;
+    height: 100%;
+    margin: 0 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px;
+    border: none;
+    border-radius: 10px;
+}
+nav .home-bg .song-icon {
+    fill :var(--color-gray17);
+}
+.home-bg:hover {
+    background-color: var(--color-lightgray);
+}
+
+.user-head {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-right: 2%;
+}
+.user-head .user-icon {
+    height: 40px;
+}
+
+.container {
+    width: auto;
+    background-color: var(--color-bg);
+    padding-top: 60px;
+    display: grid;
+    grid-template-columns: 28% 1fr;
+    justify-items: center;
+}
+/* ======================================
+=========================================
+=============== Left Zone ===============
+=========================================
+====================================== */
+.left-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: sticky;
+    top: 60px;
+    height: 100vh;
+}
+.backPro {
+    align-self: flex-start;
+    width: auto;
+    display: block;
+    margin-top: 1%;
+    margin-left: 5%;
+    display: grid;
+    grid-template-columns: auto 1fr  ;
+    justify-items: start;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+    border-radius: 15px;
+    transition: .2s;
+}
+.back-icon {
+    fill: var(--color-gray17);
+    transition: .2s;
+}
+.backPro p{
+    display: inline-block;
+    width: 100%;
+    padding-right: 0.5rem;
+    margin-left: 3%;
+    color: var(--color-gray17);
+    font-size: 16px;
+    transition: .2s;
+}
+.backPro:hover {
+    background-color: var(--color-midgray);
+    transition: .2s;
+}
+.backPro:hover p {
+    color: var(--color-text);
+    transition: .2s;
+}
+.backPro:hover .back-icon{
+    fill: var(--color-text);
+    transition: .2s;
+}
+.userprofile {
+    margin-top: 1%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.userprofile img {
+    margin: 5px 5px;
+    width: 30%;
+}
+.user-information{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+}
+.user-information .user-name{
+    font-size: 30px;
+    font-weight: var(--font-weight-mid);
+}
+.user-information .user-sub{
+    font-size: 15px;
+    font-weight: var(--font-weight-sma);
+    color: var(--color-textgray);
+}
+.user-status {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-bottom: 6%;
+}
+.user-gray {
+    color: var(--color-textgray);
+}
+.action-btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 60%;
+    border: solid;
+    border-width: 2px;
+    border-color: var(--color-blue);
+    border-radius: 30px;
+    padding: 1rem 0.5rem;
+    margin: 0.5rem 0.1rem;
+    transition: .2s;
+}
+.action-btn p {
+    font-size: 20px;
+    font-weight: var(--font-weight-mid);
+}
+.action-btn:hover{
+    scale: 1.03;
+    background-color: var(--color-blue);
+    padding: 1rem 1rem;
+    transition: .2s;
+}
+/* ======================================
+=========================================
+=============== Mid Zone ===============
+=========================================
+====================================== */
+.mid-container{
+    width: 100%;
+    height: auto;
+    margin-top: 1%;
+}
+.chord-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    width: 95%;
+}
+.chord::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-image: inherit; /* Inherit the background image from the parent */
+    filter: blur(2px); /* Adjust the blur radius as needed */
+    z-index: -1; /* Position the pseudo-element behind the content */
+}
+.chord {
+    background-color: var(--color-darkwhite);
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    /* --chord-background: linear-gradient(rgba(80, 71, 88, 0.267), #25243b); */
+    /* background-image: var(--chord-background); */
+    /* background-image: linear-gradient(rgba(80, 71, 88, 0.267),#25243b), url(attr(data-background-image)); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(5px);
+    transition: .2s;
+}
+.chord:hover{
+    scale: 1.02;
+    transition: .2s;
+}
+.chord .chord-top{
+    margin: 1rem 1rem;
+    padding-top: 60px;
+    font-size: 20px;
+    font-weight: var(--font-weight-big);
+}
+.chord .chord-down {
+    margin: 1rem 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.chord-text-down-grid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.chord-text-down {
+    color: var(--color-textgray);
+    font-size: 15px;
+}
+.chord:hover::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    pointer-events: none;
+    background: linear-gradient(#00000000, #03103353);
+    z-index: 0;
+}
+.hover-chord{
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    min-height: 120px;
+    height: 120px;
+    border-radius: 10px;
+    display: none;
+    grid-template-columns: 20% 60% 20%;
+    align-items: center;
+    z-index: 1;
+}
+.chord:hover .hover-chord {
+    display: grid;
+}
+.edit-chord{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-left: 15px;
+    border: none;
+}
+.edit-chord p{
+    display: block;
+    font-size: 14px;
+    font-weight: var(--font-weight-mid);
+}
+.edit-icon{
+    fill: var(--color-text);
+    padding: 0.6rem 0.6rem;
+    border-radius: 10px;
+    transition: .2s;
+}
+.edit-icon:hover{
+    fill: var(--color-lightblue);
+    height: 2em;
+    transition: .2s;
+}
+.edit-icon:hover+p {
+    display: block;
+    color: var(--color-lightblue);
+    text-align: center;
+}
+.delete-chord{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-right: 10px;
+    border: none;
+}
+.delete-chord p{
+    display: block;
+    font-size: 14px;
+    font-weight: var(--font-weight-mid);
+}
+.delete-icon{
+    fill: var(--color-text);
+    padding: 0.6rem 0.6rem;
+    border-radius: 10px;
+    transition: .2s;
+}
+.delete-icon:hover{
+    fill: var(--color-red);
+    height: 2em;
+    transition: .2s;
+}
+.delete-icon:hover+p {
+    display: block;
+    color: var(--color-red);
+}
