@@ -61,9 +61,7 @@ const homeRoutes = require('./routes/home');
 const fetchPosts = require('./routes/fetch-post');
 const fetchComments = require('./routes/fetch-comment');
 const fetchChords = require('./routes/fetch-chord');
-/*
 const chordView = require('./routes/fetch-chord-view');
-*/
 
 const createPost = require('./routes/create-post');
 const createChord = require('./routes/create-chord');
@@ -73,9 +71,7 @@ const deleteChord = require('./routes/delete-chord');
 */
 
 const likesPost = require('./routes/like-post');
-/*
 const likesChord = require('./routes/like-chord');
-*/
 const savesPost = require('./routes/save-post');
 /*
 const editInfo = require('./routes/edit-user');
@@ -98,9 +94,7 @@ app.use('/', homeRoutes);
 app.use('/', fetchPosts);
 app.use('/', fetchComments);
 app.use('/', fetchChords);
-/*
 app.use('/', chordView);
-*/
 app.use('/', createPost);
 app.use('/', createChord);
 app.use('/', createComment);
@@ -108,9 +102,7 @@ app.use('/', createComment);
 app.use('/', deleteChord);
 */
 app.use('/', likesPost);
-/*
 app.use('/', likesChord);
-*/
 app.use('/', savesPost);
 /*
 app.use('/', editInfo);
