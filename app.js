@@ -59,8 +59,8 @@ const otherView = require('./routes/other-view');
 const homeRoutes = require('./routes/home');
 
 const fetchPosts = require('./routes/fetch-post');
-/*
 const fetchComments = require('./routes/fetch-comment');
+/*
 const fetchChords = require('./routes/fetch-chord');
 const chordView = require('./routes/fetch-chord-view');
 */
@@ -98,8 +98,8 @@ app.use('/', otherView);
 app.use('/', homeRoutes);
 
 app.use('/', fetchPosts);
-/*
 app.use('/', fetchComments);
+/*
 app.use('/', fetchChords);
 app.use('/', chordView);
 */

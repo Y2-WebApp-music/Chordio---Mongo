@@ -17,7 +17,7 @@ router.get('/fetchpost/:id', async (req, res) => {
             .populate({ path: 'user_id', select: 'username profile_image'})
             .exec();
     } else {
-        query = Post.find({ _id: new ObjectId(req.params.id) })
+        query = Post.find({ user_id: new ObjectId(req.params.id) })
             .sort({ _id: 'desc' })
             .populate({ path: 'user_id', select: 'username profile_image'})
             .exec();

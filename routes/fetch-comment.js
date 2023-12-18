@@ -1,31 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
 
+const Comment = require('../model/comments');
 
-router.get('/fetchcomment', (req, res) => {
-    query = `SELECT *, DATE_FORMAT(comment_date, "%d %b %Y %h:%i") as commentdate FROM comments JOIN users USING(user_id) ORDER BY comment_id DESC`;
+router.get('/fetchcomment', async (req, res) => {
+    const comments = await Comment.find({})
+        .sort({ comment_id: -1 })
+        .populate({
+            path: 'user_id',
+            model: 'users',
+            select: 'username profile_image',
+        })
+        .exec();
 
-    db.query(query, (req, results) => {
-        const data = results.map(async (row) => {
-            const profile_image = row.profile_image ? row.profile_image.toString('base64') : null;
-
-            return {
-                user_id: row.user_id,
-                post_id: row.post_id,
-                comment_id: row.comment_id,
-                context: row.context,
-                comment_date: row.commentdate,
-                username: row.username,
-                profile_image: profile_image,
-            }
-        });
-        
-        Promise.all(data).then((result) => {
-            res.json(result);
-        });
-    });
+    const formattedComments = comments.map(comment => ({
+        user_id: comment.user_id._id,
+        post_id: comment.post_id,
+        comment_id: comment.comment_id,
+        context: comment.context,
+        comment_date: formatDate(comment.comment_date),
+        username: comment.user_id.username,
+        profile_image: comment.user_id.profile_image ? comment.user_id.profile_image.data.toString('base64') : null,
+    }));
+    
+    res.json(formattedComments);
 });
+
+function formatDate(date) {
+    const options = { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric' };
+    return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
+}
 
 
 module.exports = router;
