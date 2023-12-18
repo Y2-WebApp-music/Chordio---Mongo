@@ -16,7 +16,7 @@ router.post('/create-post', upload.array('images', 4), async (req, res) => {
 
     async function processImage(file) {
         // Resize the image using sharp or another image processing library
-        const resizedImageBuffer = await sharp(file.buffer).resize({ width: 512 }).toBuffer();
+        const resizedImageBuffer = await sharp(file.buffer).resize({ width: 1024 }).toBuffer();
         
         return {
             data: resizedImageBuffer,
@@ -70,6 +70,8 @@ router.post('/create-post', upload.array('images', 4), async (req, res) => {
     });
 
     await newPost.save();
+
+    res.redirect('/')
 });
 
 module.exports = router;
