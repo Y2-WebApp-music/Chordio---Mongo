@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
+const mongoose = require('mongoose');
 
+const Users = require('../model/users')
+const ObjectId = mongoose.Types.ObjectId;
 
 // Middleware to check if the user is authenticated
 const requireLogin = (req, res, next) => {
@@ -12,28 +14,58 @@ const requireLogin = (req, res, next) => {
 };
 
 // Route to get the current user's information
-router.get('/user/info', requireLogin, (req, res) => {
-    db.query('SELECT u.user_id, u.username, u.email, u.reg_date, u.profile_image, COUNT(DISTINCT p.post_id) AS num_posts, COUNT(DISTINCT c.chord_id) AS num_chords FROM users u LEFT JOIN post p ON u.user_id = p.user_id LEFT JOIN chord c ON u.user_id = c.user_id WHERE u.user_id = ? GROUP BY u.user_id', [req.session.user.user_id], (err, results) => {
-        if (err) {
-            console.error('Error fetching posts:', err);
-            res.status(500).json({ error: 'Error fetching posts' });
-        } else {
-            const data = results.map((row) => {
-                const profile_image = row.profile_image ? row.profile_image.toString('base64') : null;
-                
-                return {
-                    user_id: row.user_id,
-                    username: row.username,
-                    email: row.email,
-                    reg_date: row.reg_date,
-                    profile_image: profile_image,
-                    num_posts: row.num_posts,
-                    num_chords: row.num_chords,
-                }
-            });
-            res.json(data);
+router.get('/user/info', requireLogin, async (req, res) => {
+    const result = await Users.aggregate([
+        {
+            $match: { _id: new ObjectId(req.session.user._id) }
+        },
+        {
+            $lookup: {
+                from: 'posts',
+                localField: '_id',
+                foreignField: 'user_id',
+                as: 'post'
+            }
+        },
+        {
+            $lookup: {
+                from: 'chords',
+                localField: '_id',
+                foreignField: 'user_id',
+                as: 'chord'
+            }
+        },
+        {
+            $group: {
+                _id: '$_id',
+                username: { $first: '$username' },
+                email: { $first: '$email' },
+                reg_date: { $first: '$reg_date' },
+                profile_image: { $first: '$profile_image' },
+                num_posts: { $sum: { $size: '$post' } },
+                num_chords: { $sum: { $size: '$chord' } }
+            }
         }
-    });
+    ]).exec();
+
+    if (result.length > 0) {
+        const data = result.map((row) => {
+            const profile_image = row.profile_image ? row.profile_image.data.toString('base64') : null;
+            
+            return {
+                user_id: row._id,
+                username: row.username,
+                email: row.email,
+                reg_date: row.reg_date,
+                profile_image: profile_image,
+                num_posts: row.num_posts,
+                num_chords: row.num_chords,
+            }
+        });
+        res.json(data);
+    } else {
+        res.status(500).json({ error: 'Error fetching user' });
+    }   
 });
 
 

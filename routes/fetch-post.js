@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('./db');
 
+const Post = require('../model/post')
+
 
 // Function to promisify the database query
 const queryAsync = (query) => {

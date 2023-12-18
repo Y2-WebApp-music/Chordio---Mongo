@@ -2,22 +2,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const chordSchema = new Schema({
-    chord_id: Number,
     title: String,
     post_data: Date,
-    img_chord: Blob,
-    img_note: Blob,
+    img_chord: { data: Buffer, contentType: String },
+    img_note: { data: Buffer, contentType: String },
     artist: String,
     song_key: String,
     Bpm: Number,
     url: String,
-    img: Blob,
+    img: { data: Buffer, contentType: String },
     likes: Number,
     type: String,
     country: String,
-    user_id: Number,
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
 });
 
-const chordModel = mongoose.model('chord', chordSchema);
+const chordModel = mongoose.model('chords', chordSchema);
 
 module.exports = chordModel;
