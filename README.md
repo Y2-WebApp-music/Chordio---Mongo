@@ -20,7 +20,7 @@ MongoDB
 `DB_PASSWORD` - the database user password.
 
 ## How to Start:
--   Clone the repository using git clone `https://github.com/Y2-WebApp-music/Chordio.git`
+-   Clone the repository using git clone `https://github.com/Y2-WebApp-music/Chordio---Mongo.git`
 
 -   Download and run node js.
 
