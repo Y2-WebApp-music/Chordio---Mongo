@@ -6,7 +6,7 @@ const sharp = require('sharp');
 const multer = require('multer');
 const upload = multer();
 
-const Users = require('../model/users')
+const Users = require('../model/users');
 
 
 // Login route

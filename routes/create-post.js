@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const sharp = require('sharp');
 
-const Post = require('../model/post')
+const Post = require('../model/post');
 
 // Configure Multer for file uploads
 const storage = multer.memoryStorage();

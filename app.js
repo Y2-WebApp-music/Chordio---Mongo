@@ -5,14 +5,14 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const app = express();
 
-const Users = require('./model/users')
-const Post = require('./model/post')
-const Chord = require('./model/chord')
-const Comment = require('./model/comments')
-const Follow = require('./model/follow')
-const LC = require('./model/like_chord')
-const LP = require('./model/like_post')
-const SP = require('./model/save_post')
+const Users = require('./model/users');
+const Post = require('./model/post');
+const Chord = require('./model/chord');
+const Comment = require('./model/comments');
+const Follow = require('./model/follow');
+const LC = require('./model/like_chord');
+const LP = require('./model/like_post');
+const SP = require('./model/save_post');
 
 
 app.use(cors());
