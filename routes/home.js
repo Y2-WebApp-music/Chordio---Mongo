@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
-
 // Defult page route
 router.get('/', (req, res) => {
     if (req.session.user) {
@@ -90,6 +89,5 @@ router.get('/logout', (req, res) => {
     req.session = null;
     res.redirect('/');
 });
-
 
 module.exports = router;

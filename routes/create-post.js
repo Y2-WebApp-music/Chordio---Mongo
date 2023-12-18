@@ -72,5 +72,4 @@ router.post('/create-post', upload.array('images', 4), async (req, res) => {
     await newPost.save();
 });
 
-
 module.exports = router;

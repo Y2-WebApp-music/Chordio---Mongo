@@ -7,7 +7,6 @@ const LikePost = require('../model/like_post');
 const SavePost = require('../model/save_post');
 const ObjectId = mongoose.Types.ObjectId;
 
-
 router.get('/fetchpost/:id', async (req, res) => {
     let query;
 
@@ -65,6 +64,5 @@ router.get('/fetchpost/:id', async (req, res) => {
 
     res.json(data);
 });
-
 
 module.exports = router;

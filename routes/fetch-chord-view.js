@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-
 router.get('/chordview/:chord_id', async (req, res) => {
     try {
         const chordId = req.params.chord_id;
@@ -194,6 +193,5 @@ router.get('/chordview/:chord_id', async (req, res) => {
         res.status(500).send(error);
     }
 });
-
 
 module.exports = router;

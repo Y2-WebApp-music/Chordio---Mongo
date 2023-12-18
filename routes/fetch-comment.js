@@ -31,5 +31,4 @@ function formatDate(date) {
     return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
 }
 
-
 module.exports = router;

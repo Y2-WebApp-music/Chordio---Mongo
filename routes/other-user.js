@@ -56,5 +56,4 @@ router.get('/otheruser/:user_id', async (req, res) => {
     res.json(userWithIdAsString);
 });
 
-
 module.exports = router;

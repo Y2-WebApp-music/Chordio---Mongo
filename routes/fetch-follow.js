@@ -41,5 +41,4 @@ router.get('/following', requireLogin, async (req, res) => {
         res.json(data);
 });
 
-
 module.exports = router;

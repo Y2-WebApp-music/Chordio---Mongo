@@ -8,7 +8,6 @@ const Chord = require('../model/chord');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-
 // Handle file uploads
 router.post('/create-chord', upload.array('images', 3), async (req, res) => {
     // Check if files were uploaded
@@ -88,6 +87,5 @@ router.post('/create-chord', upload.array('images', 3), async (req, res) => {
 
     res.redirect('/song');
 });
-
 
 module.exports = router;

@@ -32,5 +32,4 @@ router.post('/edit-pass', upload.none(), async (req, res) => {
     }
 });
 
-
 module.exports = router;

@@ -22,5 +22,4 @@ router.post('/create-comment/:post_id', async (req, res) => {
     res.status(200).send('Comment created successfully');
 });
 
-
 module.exports = router;

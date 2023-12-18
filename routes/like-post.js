@@ -23,5 +23,4 @@ router.post('/likes/post', async (req, res) => {
     }
 });
 
-
 module.exports = router;

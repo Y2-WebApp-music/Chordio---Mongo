@@ -15,5 +15,4 @@ router.post('/chordDelete/:id', async (req, res) => {
     res.redirect('/song');
 });
 
-
 module.exports = router;

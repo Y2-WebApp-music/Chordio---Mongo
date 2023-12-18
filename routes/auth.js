@@ -8,7 +8,6 @@ const upload = multer();
 
 const Users = require('../model/users');
 
-
 // Login route
 router.post('/login', upload.none(), (req, res) => {
     const { user_email, user_pass } = req.body;
@@ -38,7 +37,6 @@ router.post('/login', upload.none(), (req, res) => {
             return res.status(500).json({ error: 'Internal Server Error' });
         });
 });
-
 
 // Register route
 router.post('/register', upload.none(), async (req, res) => {
@@ -84,6 +82,5 @@ router.post('/register', upload.none(), async (req, res) => {
         console.error("error: ", err);
     }
 });
-
 
 module.exports = router;

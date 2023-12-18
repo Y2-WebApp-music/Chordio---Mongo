@@ -68,5 +68,4 @@ router.get('/user/info', requireLogin, async (req, res) => {
     }   
 });
 
-
 module.exports = router;

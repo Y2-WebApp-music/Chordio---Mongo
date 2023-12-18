@@ -2,17 +2,16 @@ const express = require('express');
 const router = express.Router();
 const multer = require("multer");
 const sharp = require('sharp');
-const db = require('./db');
 
+const User = require('../model/users');
 
 // Configure Multer for file uploads
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-
 router.post('/edit-user', upload.single('image'), async (req, res) => {
     const user = req.session.user;
-    const user_id = user.user_id;
+    const user_id = user._id;
 
     let processedImageBuffer;
 
@@ -26,23 +25,19 @@ router.post('/edit-user', upload.single('image'), async (req, res) => {
 
     const { username, email } = req.body;
 
-    let query = 'UPDATE users SET username = ?, email = ?, profile_image = ? WHERE user_id = ?';
-    let data = [username, email, processedImageBuffer, user_id];
+    let updateFields = { username, email };
 
-    if (!processedImageBuffer) {
-        query = 'UPDATE users SET username = ?, email = ? WHERE user_id = ?';
-        data = [username, email, user_id];
+    if (processedImageBuffer) {
+        updateFields.profile_image = {
+            data: processedImageBuffer,
+            contentType: req.file.mimetype
+        };
     }
 
-    db.query(query, data, err => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-    });
+    // Update the user's information in the database
+    await User.findByIdAndUpdate(user_id, updateFields);
 
     res.redirect('/setting');
 });
-
 
 module.exports = router;

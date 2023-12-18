@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-
 router.get('/otheruserprofile/:user_id', async (req, res) => {
     try {
         const user_id = req.params.user_id;
@@ -187,6 +186,5 @@ router.get('/otheruserprofile/:user_id', async (req, res) => {
         res.status(500).send(error);
     }
 });
-
 
 module.exports = router;
