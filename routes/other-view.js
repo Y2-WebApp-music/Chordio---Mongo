@@ -7,7 +7,7 @@ router.get('/otheruserprofile/:user_id', async (req, res) => {
     try {
         const user_id = req.params.user_id;
 
-        if (user_id == req.session.user.user_id) {
+        if (user_id == req.session.user._id) {
             res.redirect('/userprofile');
             return;
         }
@@ -20,11 +20,11 @@ router.get('/otheruserprofile/:user_id', async (req, res) => {
 
         // Fetch chord data
         const userData = await axios.get(`http://localhost:3000/otheruser/${user_id}`, config);
-        const user = userData.data[0];
+        const user = userData.data;
 
         // Fetch user data
         const curUserData = await axios.get(`http://localhost:3000/user/info`, config);
-        const curUser = curUserData.data[0];
+        const curUser = curUserData.data;
 
         // Generate HTML response using template literals
         const html = `
@@ -53,7 +53,7 @@ router.get('/otheruserprofile/:user_id', async (req, res) => {
                 <script defer src="/js/chord/fetchchord.js " type="module"></script>
 
                 <script>
-                    const homeValue = ${user.user_id}; // This will insert the value from the server-side into the client-side JavaScript
+                    const homeValue = '${user._id}'; // This will insert the value from the server-side into the client-side JavaScript
 
                     // Embed user data in a global variable
                     var userData = ${JSON.stringify(user)};
@@ -85,13 +85,13 @@ router.get('/otheruserprofile/:user_id', async (req, res) => {
                             </div>
                         </nav>
                         <div class="user-head">
-                            <img src="data:image/png;base64,${user.profile_image}" class="user-icon" id="usericon">
+                            <img src="data:image/png;base64,${user.profile_image.data}" class="user-icon" id="usericon">
                             <div class="user-popup" id="userPopup">
                                 <div class="user-profile-popup" id="user-page-btn">
-                                    <img src="data:image/png;base64,${user.profile_image}" class="my-img" alt="">
+                                    <img src="data:image/png;base64,${user.profile_image.data}" class="my-img" alt="">
                                     <div>
                                         <p class="me">${user.username}</p>
-                                        <p class="id">${user.user_id}</p>
+                                        <p class="id">${user._id}</p>
                                     </div>
                                 </div>
                                 <div class="user-popup-btn userchord">
@@ -125,10 +125,10 @@ router.get('/otheruserprofile/:user_id', async (req, res) => {
             ======================================  -->
                     <div class="left-container prevent-select">
                         <div class="userprofile">
-                            <img src="data:image/png;base64,${user.profile_image}" class="other-user-img" alt="">
+                            <img src="data:image/png;base64,${user.profile_image.data}" class="other-user-img" alt="">
                             <div class="user-information">
                                 <p class="user-name other-me">${user.username}</p>
-                                <p class="user-sub other-id">${user.user_id}</p>
+                                <p class="user-sub other-id">${user._id}</p>
                                 <p class="user-sub other-email">${user.email}</p>
                             </div>
                             <div class="user-status">

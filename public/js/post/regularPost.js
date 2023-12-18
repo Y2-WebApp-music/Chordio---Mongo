@@ -12,7 +12,7 @@ export class RegularPost extends Post {
                         src="data:image/png;base64,${this.profile_image}" class="user-icon-post prevent-select">
                 </a>
                 <div class="post-user-text">
-                    <a href="/otheruserprofile/${this.userid} class="post-username">${this.username}</a>
+                    <a href="/otheruserprofile/${this.userid}" class="post-username">${this.username}</a>
                     <p class="post-date">${this.postdate}</p>
                 </div>
             </div>

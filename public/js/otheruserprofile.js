@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         method: 'GET',
         success: function (data) {
             data.forEach(following => { 
-                if (user.user_id === following.user_id) {
+                if (user._id === following.user_id) {
                     follow.classList.toggle('active');
                     followBtn.classList.toggle('active');
 
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
             text.textContent = 'Follow';
         }
 
-        sendFollowToServer(otherId, curUser.user_id, isFollow);
+        sendFollowToServer(otherId, curUser._id, isFollow);
     });
 
     const sendFollowToServer = (following_id, follower_id, isFollow) => {

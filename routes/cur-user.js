@@ -24,7 +24,7 @@ router.get('/user/info', requireLogin, async (req, res) => {
                 from: 'posts',
                 localField: '_id',
                 foreignField: 'user_id',
-                as: 'post'
+                as: 'posts'
             }
         },
         {
@@ -32,7 +32,7 @@ router.get('/user/info', requireLogin, async (req, res) => {
                 from: 'chords',
                 localField: '_id',
                 foreignField: 'user_id',
-                as: 'chord'
+                as: 'chords'
             }
         },
         {
@@ -42,8 +42,8 @@ router.get('/user/info', requireLogin, async (req, res) => {
                 email: { $first: '$email' },
                 reg_date: { $first: '$reg_date' },
                 profile_image: { $first: '$profile_image' },
-                num_posts: { $sum: { $size: '$post' } },
-                num_chords: { $sum: { $size: '$chord' } }
+                num_posts: { $sum: { $size: '$posts' } },
+                num_chords: { $sum: { $size: '$chords' } }
             }
         }
     ]).exec();

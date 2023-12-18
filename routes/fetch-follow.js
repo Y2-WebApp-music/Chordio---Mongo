@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
+
+const User = require('../model/users')
+const Follow = require('../model/follow')
 
 
 // Middleware to check if the user is authenticated
@@ -11,50 +13,32 @@ const requireLogin = (req, res, next) => {
     next();
 };
 
-router.get('/follower', requireLogin, (req, res) => {
-    const cur_id = req.session.user.user_id;
+router.get('/follower', requireLogin, async (req, res) => {
+    const cur_id = req.session.user._id;
 
-    const query = `SELECT f.follower_id, u.username, u.profile_image FROM follow f join users u ON f.follower_id = u.user_id WHERE following_id = ${cur_id}`;
+    const followers = await Follow.find({ following_id: cur_id }).populate('follower_id', 'username profile_image');
 
-    db.query(query, (err, results) => {
-        if (err) {
-            console.error(err);
-        } else {
-            const data = results.map((row) => {
-                const profile_image = row.profile_image ? row.profile_image.toString('base64') : null;
+    const data = followers.map((follow) => ({
+        user_id: follow.follower_id._id.toString(),
+        username: follow.follower_id.username,
+        profile_image: follow.follower_id.profile_image.data ? follow.follower_id.profile_image.data.toString('base64') : null,
+    }));
 
-                return {
-                    user_id: row.follower_id,
-                    username: row.username,
-                    profile_image: profile_image,
-                }
-            });
-            res.json(data);
-        }
-    });
+    res.json(data);
 });
 
-router.get('/following', requireLogin, (req, res) => {
-    const cur_id = req.session.user.user_id;
+router.get('/following', requireLogin, async (req, res) => {
+    const cur_id = req.session.user._id;
 
-    const query = `SELECT f.following_id, u.username, u.profile_image FROM follow f join users u ON f.following_id = u.user_id WHERE follower_id = ${cur_id}`;
+    const following = await Follow.find({ follower_id: cur_id }).populate('following_id', 'username profile_image');
 
-    db.query(query, (err, results) => {
-        if (err) {
-            console.error(err);
-        } else {
-            const data = results.map((row) => {
-                const profile_image = row.profile_image ? row.profile_image.toString('base64') : null;
+        const data = following.map((follow) => ({
+            user_id: follow.following_id._id.toString(),
+            username: follow.following_id.username,
+            profile_image: follow.following_id.profile_image.data ? follow.following_id.profile_image.data.toString('base64') : null,
+        }));
 
-                return {
-                    user_id: row.following_id,
-                    username: row.username,
-                    profile_image: profile_image,
-                }
-            });
-            res.json(data);
-        }
-    });
+        res.json(data);
 });
 
 

@@ -52,10 +52,8 @@ app.use(express.static(__dirname + '/views'));
 const authRoutes = require('./routes/auth');
 
 const curUser = require('./routes/cur-user');
-/*
 const otherUser = require('./routes/other-user');
 const otherView = require('./routes/other-view');
-*/
 const homeRoutes = require('./routes/home');
 
 const fetchPosts = require('./routes/fetch-post');
@@ -74,8 +72,9 @@ const savesPost = require('./routes/save-post');
 /*
 const editInfo = require('./routes/edit-user');
 const editPass = require('./routes/edit-pass');
-
+*/
 const follower = require('./routes/fetch-follow');
+/*
 const follow = require('./routes/follow-user');
 */
 
@@ -83,10 +82,8 @@ const follow = require('./routes/follow-user');
 app.use('/', authRoutes);
 
 app.use('/', curUser);
-/*
 app.use('/', otherUser);
 app.use('/', otherView);
-*/
 app.use('/', homeRoutes);
 
 app.use('/', fetchPosts);
@@ -103,8 +100,9 @@ app.use('/', savesPost);
 /*
 app.use('/', editInfo);
 app.use('/', editPass);
-
+*/
 app.use('/', follower);
+/*
 app.use('/', follow);
 */
 

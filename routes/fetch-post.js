@@ -44,7 +44,7 @@ router.get('/fetchpost/:id', async (req, res) => {
         });
 
         return {
-            user_id: post.user_id,
+            user_id: post.user_id._id.toString(),
             post_id: post._id,
             title: post.title,
             postdate: post.post_date.toLocaleDateString(),
