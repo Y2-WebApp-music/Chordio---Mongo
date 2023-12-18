@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const app = express();
@@ -13,6 +14,8 @@ const LC = require('./model/like_chord')
 const LP = require('./model/like_post')
 const SP = require('./model/save_post')
 
+
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -54,13 +57,16 @@ const otherUser = require('./routes/other-user');
 const otherView = require('./routes/other-view');
 */
 const homeRoutes = require('./routes/home');
-/*
+
 const fetchPosts = require('./routes/fetch-post');
+/*
 const fetchComments = require('./routes/fetch-comment');
 const fetchChords = require('./routes/fetch-chord');
 const chordView = require('./routes/fetch-chord-view');
+*/
 
 const createPost = require('./routes/create-post');
+/*
 const createChord = require('./routes/create-chord');
 const createComment = require('./routes/create-comment');
 
@@ -87,13 +93,15 @@ app.use('/', otherUser);
 app.use('/', otherView);
 */
 app.use('/', homeRoutes);
-/*
+
 app.use('/', fetchPosts);
+/*
 app.use('/', fetchComments);
 app.use('/', fetchChords);
 app.use('/', chordView);
-
+*/
 app.use('/', createPost);
+/*
 app.use('/', createChord);
 app.use('/', createComment);
 

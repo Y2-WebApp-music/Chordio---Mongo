@@ -1,21 +1,33 @@
 const express = require('express');
 const router = express.Router();
 const multer = require("multer");
-const db = require('./db');
+const sharp = require('sharp');
 
+const Post = require('../model/post')
 
 // Configure Multer for file uploads
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // Handle file uploads
-router.post('/create-post', upload.array('images', 4), (req, res) => {
+router.post('/create-post', upload.array('images', 4), async (req, res) => {
     // Check if files were uploaded
-    const imagePaths = req.files ? req.files.map((file) => file.buffer) : [];
-    
+    const images = req.files ? await Promise.all(req.files.map(processImage)) : [];
+
+    async function processImage(file) {
+        // Resize the image using sharp or another image processing library
+        const resizedImageBuffer = await sharp(file.buffer).resize({ width: 512 }).toBuffer();
+        
+        return {
+            data: resizedImageBuffer,
+            contentType: file.mimetype,
+        };
+    }
+
     // Get text inputs
     let { cr_post_title, cr_post_detail, categoryId, tagId } = req.body;
 
+    // Map category and tag
     const categoryMapping = {
         1: 'Theory',
         2: 'Sound engineer',
@@ -30,7 +42,7 @@ router.post('/create-post', upload.array('images', 4), (req, res) => {
         11: 'other'
     };
     const category = categoryMapping[categoryId];
-
+    
     const tagMapping = {
         'post-1': 'Question',
         'post-2': 'Article',
@@ -41,22 +53,23 @@ router.post('/create-post', upload.array('images', 4), (req, res) => {
     cr_post_title = cr_post_title.replace(/\n/g, '<br>'); 
     cr_post_detail = cr_post_detail.replace(/\n/g, '<br>');
 
-    const id = req.session.user.user_id;
-    const date = new Date();
-
-    // Create an object to hold the data for insertion
-    const insertData = [cr_post_title, date, cr_post_detail, imagePaths[0] || null, imagePaths[1] || null, imagePaths[2] || null, imagePaths[3] || null, id, category, tag];
-    
-    // Insert data into the database
-    const sql = 'INSERT INTO post (title, post_date, content, img1, img2, img3, img4, user_id, category, tag) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    db.query(sql, insertData, err => {
-        if (err) {
-            console.error(err);
-            return;
-        }
+    const user_id = req.session.user._id;
+    const post_date = new Date();
+    const newPost = new Post({
+        title: cr_post_title,
+        post_date: post_date,
+        content: cr_post_detail,
+        img1: images[0],
+        img2: images[1],
+        img3: images[2],
+        img4: images[3],
+        likes: 0,
+        category: category,
+        tag: tag,
+        user_id: user_id,
     });
-    
-    res.redirect('/');
+
+    await newPost.save();
 });
 
 

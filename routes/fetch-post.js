@@ -1,74 +1,69 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
+const mongoose = require('mongoose');
 
 const Post = require('../model/post')
+const LikePost = require('../model/like_post');
+const SavePost = require('../model/save_post');
+const ObjectId = mongoose.Types.ObjectId;
 
 
-// Function to promisify the database query
-const queryAsync = (query) => {
-    return new Promise((resolve, reject) => {
-        db.query(query, (err, results) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(results);
-            }
-        });
-    });
-};
+router.get('/fetchpost/:id', async (req, res) => {
+    let query;
 
-router.get('/fetchpost/:id', (req, res) => {
-    if(req.params.id == 'all') {
-        query = 'SELECT *, DATE_FORMAT(post_date, "%d %b %Y %h:%i") as postdate FROM post JOIN users USING(user_id) ORDER BY post_id DESC';
+    if (req.params.id == 'all') {
+        query = Post.find({})
+            .sort({ _id: 'desc' })
+            .populate({ path: 'user_id', select: 'username profile_image'})
+            .exec();
     } else {
-        query = `SELECT *, DATE_FORMAT(post_date, "%d %b %Y %h:%i") as postdate FROM post JOIN users USING(user_id) WHERE user_id=${req.params.id} ORDER BY post_id DESC`;
+        query = Post.find({ _id: new ObjectId(req.params.id) })
+            .sort({ _id: 'desc' })
+            .populate({ path: 'user_id', select: 'username profile_image'})
+            .exec();
     }
 
-    db.query(query, (err, results) => {
-        if (err) {
-            throw err;
-        } else {
-            const data = results.map(async (row) => {
-                const img1 = row.img1 ? row.img1.toString('base64') : null;
-                const img2 = row.img2 ? row.img2.toString('base64') : null;
-                const img3 = row.img3 ? row.img3.toString('base64') : null;
-                const img4 = row.img4 ? row.img4.toString('base64') : null;
-                const profile_image = row.profile_image ? row.profile_image.toString('base64') : null;
-                
-                // Check if the user has liked the post
-                const likeQuery = `SELECT COUNT(*) as isLike FROM like_post WHERE user_id=${req.session.user.user_id} AND post_id=${row.post_id}`;
-                const likeResult = await queryAsync(likeQuery);
+    const results = await query;
 
-                // Check if the user has liked the post
-                const saveQuery = `SELECT COUNT(*) as isSave FROM save_post WHERE user_id=${req.session.user.user_id} AND post_id=${row.post_id}`;
-                const saveResult = await queryAsync(saveQuery);
-                
-                return {
-                    user_id: row.user_id,
-                    post_id: row.post_id,
-                    title: row.title,
-                    postdate: row.postdate,
-                    content: row.content,
-                    img1: img1,
-                    img2: img2,
-                    img3: img3,
-                    img4: img4,
-                    likes: row.likes,
-                    category: row.category,
-                    tag: row.tag,
-                    username: row.username,
-                    profile_image: profile_image,
-                    isLike: likeResult[0].isLike === 1,
-                    isSave: saveResult[0].isSave === 1,
-                };
-            });
+    const data = await Promise.all(results.map(async (post) => {
+    const img1 = post.img1.data ? post.img1.data.toString('base64') : null;
+        const img2 = post.img2.data ? post.img2.data.toString('base64') : null;
+        const img3 = post.img3.data ? post.img3.data.toString('base64') : null;
+        const img4 = post.img4.data ? post.img4.data.toString('base64') : null;
 
-            Promise.all(data).then((result) => {
-                res.json(result);
-            });
-        }
-    });
+        // Check if the user has liked the post
+        const likeResult = await LikePost.countDocuments({
+            user_id: req.session.user.user_id,
+            post_id: post.post_id,
+        });
+
+        // Check if the user has saved the post
+        const saveResult = await SavePost.countDocuments({
+            user_id: req.session.user.user_id,
+            post_id: post.post_id,
+        });
+
+        return {
+            user_id: post.user_id,
+            post_id: post.post_id,
+            title: post.title,
+            postdate: post.post_date.toLocaleDateString(),
+            content: post.content,
+            img1: img1,
+            img2: img2,
+            img3: img3,
+            img4: img4,
+            likes: post.likes,
+            category: post.category,
+            tag: post.tag,
+            username: post.user_id.username,
+            profile_image: post.user_id.profile_image.data ? post.user_id.profile_image.data.toString('base64') : null,
+            isLike: likeResult === 1,
+            isSave: saveResult === 1,
+        };
+    }));
+
+    res.json(data);
 });
 
 

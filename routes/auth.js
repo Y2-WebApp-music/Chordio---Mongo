@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const fs = require('fs');
+const sharp = require('sharp');
 const multer = require('multer');
 const upload = multer();
 
@@ -48,7 +49,11 @@ router.post('/register', upload.none(), async (req, res) => {
 
         const imagePath = 'public/img/circletest.png';
 
-        const imageData = fs.readFileSync(imagePath);
+        const originalImageData  = fs.readFileSync(imagePath);
+
+        const resizedImageBuffer = await sharp(originalImageData )
+            .resize({ width: 300 })
+            .toBuffer();
 
         const result = await Users.find({email:user_email}).exec();
         if (result.length > 0) {
@@ -66,7 +71,7 @@ router.post('/register', upload.none(), async (req, res) => {
                     password: hash,
                     reg_date: registrationDate,
                     profile_image: {
-                        data: imageData,
+                        data: resizedImageBuffer,
                         contentType: 'image/png'
                     }
                 });
