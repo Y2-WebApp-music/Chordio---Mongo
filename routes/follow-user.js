@@ -1,24 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
+const Follow = require('../model/follow')
 
-router.post('/follow-user', (req, res) => {
-    const following_id = req.body.following_id;
-    const follower_id = req.body.follower_id;
-
-    const isFollow = req.body.isFollow === '1';
+router.post('/follow-user', async (req, res) => {
     
-    const insertQuery = isFollow
-        ? 'INSERT INTO follow (following_id, follower_id) VALUES (?, ?)'
-        : 'DELETE FROM follow WHERE following_id = ? AND follower_id = ?';
-        
-    db.query(insertQuery, [following_id, follower_id], (err) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-    });
+    let { following_id, follower_id, isFollow } = req.body;
+
+    following_id = new ObjectId(following_id);
+    follower_id = new ObjectId(follower_id);
+
+    if (isFollow === '1') {
+        // Follow the user
+        await Follow.create({ following_id, follower_id });
+    } else {
+        // Unfollow the user
+        await Follow.findOneAndDelete({ following_id, follower_id });
+    }
+
+    res.sendStatus(200);
 });
 
 

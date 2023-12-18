@@ -24,7 +24,7 @@ router.get('/otheruserprofile/:user_id', async (req, res) => {
 
         // Fetch user data
         const curUserData = await axios.get(`http://localhost:3000/user/info`, config);
-        const curUser = curUserData.data;
+        const curUser = curUserData.data[0];
 
         // Generate HTML response using template literals
         const html = `

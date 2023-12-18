@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const follow = document.querySelector('.follow-btn');
     const followBtn = document.querySelector('.action-btn');
     const text = document.querySelector('.btn-text');
-    const otherId = Number(document.querySelector('.other-id').textContent);
 
     const user = window.userData;
     const curUser = window.curUserData;
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
             text.textContent = 'Follow';
         }
 
-        sendFollowToServer(otherId, curUser._id, isFollow);
+        sendFollowToServer(user._id, curUser.user_id, isFollow);
     });
 
     const sendFollowToServer = (following_id, follower_id, isFollow) => {
@@ -59,9 +58,6 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             success: function(response) {
                 console.log(response);
-            },
-            error: function(errror) {
-                console.error(errror);
             }
         });
     }

@@ -74,9 +74,7 @@ const editInfo = require('./routes/edit-user');
 const editPass = require('./routes/edit-pass');
 */
 const follower = require('./routes/fetch-follow');
-/*
 const follow = require('./routes/follow-user');
-*/
 
 // Use route files
 app.use('/', authRoutes);
@@ -102,9 +100,7 @@ app.use('/', editInfo);
 app.use('/', editPass);
 */
 app.use('/', follower);
-/*
 app.use('/', follow);
-*/
 
 const PORT = 3000;
 app.listen(PORT, () => {
