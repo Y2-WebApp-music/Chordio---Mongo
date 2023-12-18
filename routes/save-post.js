@@ -1,23 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
 
+const Post = require('../model/post');
+const SavePost = require('../model/save_post');
 
-router.post('/saves/post', (req, res) => {
+router.post('/saves/post', async (req, res) => {
     const post_id = req.body.post_id;
     const isIncrementing = req.body.isIncrementing === '1';
-    const user_id = req.session.user.user_id;
+    const user_id = req.session.user._id;
 
-    const insertQuery = isIncrementing
-        ? 'INSERT INTO save_post (user_id, post_id) VALUES (?, ?)'
-        : 'DELETE FROM save_post WHERE user_id = ? AND post_id = ?';
-        
-    db.query(insertQuery, [user_id, post_id], (err) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-    });
+    // Insert or delete save_post entry
+    if (isIncrementing) {
+        await SavePost.create({ user_id, post_id });
+    } else {
+        await SavePost.deleteOne({ user_id, post_id });
+    }
 });
 
 

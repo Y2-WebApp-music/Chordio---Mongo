@@ -76,9 +76,9 @@ const deleteChord = require('./routes/delete-chord');
 const likesPost = require('./routes/like-post');
 /*
 const likesChord = require('./routes/like-chord');
-
+*/
 const savesPost = require('./routes/save-post');
-
+/*
 const editInfo = require('./routes/edit-user');
 const editPass = require('./routes/edit-pass');
 
@@ -112,9 +112,9 @@ app.use('/', deleteChord);
 app.use('/', likesPost);
 /*
 app.use('/', likesChord);
-
+*/
 app.use('/', savesPost);
-
+/*
 app.use('/', editInfo);
 app.use('/', editPass);
 
