@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const multer = require("multer");
-const db = require('./db');
 
+const Chord = require('../model/chord');
 
 // Configure Multer for file uploads
 const storage = multer.memoryStorage();
@@ -10,9 +10,12 @@ const upload = multer({ storage: storage });
 
 
 // Handle file uploads
-router.post('/create-chord', upload.array('images', 3), (req, res) => {
+router.post('/create-chord', upload.array('images', 3), async (req, res) => {
     // Check if files were uploaded
-    const imagePaths = req.files ? req.files.map((file) => file.buffer) : [];
+    const imagePaths = req.files ? req.files.map((file) => ({
+        data: file.buffer,
+        contentType: file.mimetype,
+    })) : [];
     
     // Get text inputs
     const { SongName, ArtistName, Key, BPM, type, nationality, YTlink} = req.body;
@@ -62,21 +65,26 @@ router.post('/create-chord', upload.array('images', 3), (req, res) => {
     }
     const country = countryMapping[nationality];
 
-    const id = req.session.user.user_id;
+    const userId = req.session.user._id;
     const date = new Date();
 
     // Create an object to hold the data for insertion
-    const insertData = [SongName, date, imagePaths[1] || null, imagePaths[2] || null, ArtistName, key, BPM || null, YTlink, imagePaths[0] || null, id, chordType, country];
-
-    // Insert data into the database
-    const sql = 'INSERT INTO chord (title, post_date, img_chord, img_note, artist, song_key, Bpm, url, img, user_id, type, country) VALUES (?, ?, ?, ? , ? , ?, ?, ?, ?, ?, ?, ?)';
-    
-    db.query(sql, insertData, err => {
-        if (err) {
-            console.error(err);
-            return;
-        }
+    const newChord = new Chord({
+        title: SongName,
+        post_date: date,
+        img_chord: imagePaths[1] || null,
+        img_note: imagePaths[2] || null,
+        artist: ArtistName,
+        song_key: key,
+        Bpm: BPM || null,
+        url: YTlink,
+        img: imagePaths[0] || null,
+        user_id: userId,
+        type: chordType,
+        country: country,
     });
+
+    await newChord.save();
 
     res.redirect('/song');
 });

@@ -66,9 +66,7 @@ const chordView = require('./routes/fetch-chord-view');
 */
 
 const createPost = require('./routes/create-post');
-/*
 const createChord = require('./routes/create-chord');
-*/
 const createComment = require('./routes/create-comment');
 /*
 const deleteChord = require('./routes/delete-chord');
@@ -104,9 +102,7 @@ app.use('/', fetchChords);
 app.use('/', chordView);
 */
 app.use('/', createPost);
-/*
 app.use('/', createChord);
-*/
 app.use('/', createComment);
 /*
 app.use('/', deleteChord);
