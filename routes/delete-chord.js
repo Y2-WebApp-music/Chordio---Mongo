@@ -1,21 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
 
+const Chord = require('../model/chord');
 
-router.post('/chordDelete/:id', (req, res) => {
+router.post('/chordDelete/:id', async (req, res) => {
     const chordId = req.params.id;
 
-    const sql = 'DELETE FROM chord WHERE chord_id = ?';
+    const result = await Chord.findByIdAndDelete(chordId);
 
-    db.query(sql, [chordId], (err, result) => {
-        if (err) {
-            console.error('Error executing query:', err);
-            return;
-        }
-        console.log('Chord deleted successfully');
-    });
-    
+    if (!result) {
+        return res.status(404).send('Chord not found');
+    }
+
     res.redirect('/song');
 });
 
