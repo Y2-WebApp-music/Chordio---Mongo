@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const chordSchema = new Schema({
     title: String,
-    post_data: Date,
+    post_date: Date,
     img_chord: { data: Buffer, contentType: String },
     img_note: { data: Buffer, contentType: String },
     artist: String,
