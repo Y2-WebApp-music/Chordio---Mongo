@@ -20,7 +20,7 @@ router.get('/fetchcomment', async (req, res) => {
         context: comment.context,
         comment_date: formatDate(comment.comment_date),
         username: comment.user_id.username,
-        profile_image: comment.user_id.profile_image ? comment.user_id.profile_image.data.toString('base64') : null,
+        profile_image: comment.user_id.profile_image.data ? comment.user_id.profile_image.data.toString('base64') : null,
     }));
     
     res.json(formattedComments);
