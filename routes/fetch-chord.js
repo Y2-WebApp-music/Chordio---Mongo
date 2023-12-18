@@ -1,83 +1,61 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
 
+const Chord = require('../model/chord');
+const LikeChord = require('../model/like_chord')
 
-// Function to promisify the database query
-const queryAsync = (query) => {
-    return new Promise((resolve, reject) => {
-        db.query(query, (err, results) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(results);
-            }
-        });
-    });
-};
-
-router.get('/fetchchord/:id', (req, res) => {
+router.get('/fetchchord/:id', async (req, res) => {
     const userId = req.params.id;
     const chordId = req.query.chord_id;
-    const cur_id = req.session.user.user_id;
+    const cur_id = req.session.user._id;
 
-    let query;
+    let query = {};
 
-    if (userId == 'all') {
-        if (chordId) {
-            query = `SELECT *, DATE_FORMAT(post_date, "%d %b %Y %h:%i") as postdate FROM chord JOIN users USING(user_id) WHERE chord_id = ${chordId} ORDER BY likes DESC`;
-        }
-        else {
-            query = `SELECT *, DATE_FORMAT(post_date, "%d %b %Y %h:%i") as postdate FROM chord JOIN users USING(user_id) ORDER BY likes DESC`;
-        }
-    }
-    else {
-        if (chordId) {
-            query = `SELECT *, DATE_FORMAT(post_date, "%d %b %Y %h:%i") as postdate FROM chord JOIN users USING(user_id) WHERE user_id=${userId} AND chord_id = ${chordId} ORDER BY likes DESC`;
-        }
-        else {
-            query = `SELECT *, DATE_FORMAT(post_date, "%d %b %Y %h:%i") as postdate FROM chord JOIN users USING(user_id) WHERE user_id=${userId} ORDER BY likes DESC`;
-        }
+    if (userId !== 'all') {
+        query.user_id = userId;
     }
 
-    db.query(query, (err, results) => {
-        if (err) {
-            throw err;
-        } else {
-            const data = results.map(async (row) => {
-                const img_chord = row.img_chord ? row.img_chord.toString('base64') : null;
-                const img_note = row.img_note ? row.img_note.toString('base64') : null;
-                const img = row.img ? row.img.toString('base64') : null;
-                
-                // Check if the user has liked the chord
-                const likeQuery = `SELECT COUNT(*) as isLike FROM like_chord WHERE user_id=${cur_id} AND chord_id=${row.chord_id}`;
-                const likeResult = await queryAsync(likeQuery);
-                
-                return {
-                    user_id: row.user_id,
-                    chord_id: row.chord_id,
-                    title: row.title,
-                    postdate: row.postdate,
-                    img_chord: img_chord,
-                    img_note: img_note,
-                    img: img,
-                    artist: row.artist,
-                    song_key: row.song_key,
-                    Bpm: row.Bpm,
-                    url: row.url,
-                    likes: row.likes,
-                    username: row.username,
-                    type: row.type,
-                    country: row.country,
-                    isLike: likeResult[0].isLike === 1,
-                };
-            });
+    if (chordId) {
+        query._id = chordId; // Assuming chordId is the MongoDB ObjectId
+    }
 
-            Promise.all(data).then((result) => {
-                res.json(result);
-            });
-        }
-    });
+    let results = await Chord.find(query)
+        .sort({ likes: -1 })
+        .populate({ path: 'user_id', select: 'username'})
+        .exec();
+
+    const data = await Promise.all(results.map(async (chord) => {
+        const img_chord = chord.img_chord.data ? chord.img_chord.data.toString('base64') : null;
+        const img_note = chord.img_note.data ? chord.img_note.data.toString('base64') : null;
+        const img = chord.img.data ? chord.img.data.toString('base64') : null;
+
+        // Check if the user has liked the chord
+        const isLike = await LikeChord.countDocuments({
+            user_id: cur_id,
+            chord_id: chord._id,
+        });
+
+        return {
+            user_id: chord.user_id,
+            chord_id: chord._id,
+            title: chord.title,
+            postdate: chord.post_date.toLocaleDateString(),
+            img_chord: img_chord,
+            img_note: img_note,
+            img: img,
+            artist: chord.artist,
+            song_key: chord.song_key,
+            Bpm: chord.Bpm,
+            url: chord.url,
+            likes: chord.likes,
+            username: chord.user_id.username,
+            type: chord.type,
+            country: chord.country,
+            isLike: isLike === 1,
+        };
+    }));
+
+    res.json(data);
 });
 
 
