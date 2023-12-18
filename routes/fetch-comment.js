@@ -5,7 +5,7 @@ const Comment = require('../model/comments');
 
 router.get('/fetchcomment', async (req, res) => {
     const comments = await Comment.find({})
-        .sort({ comment_id: -1 })
+        .sort({ _id: -1 })
         .populate({
             path: 'user_id',
             model: 'users',
