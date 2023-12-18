@@ -33,13 +33,13 @@ router.get('/fetchpost/:id', async (req, res) => {
 
         // Check if the user has liked the post
         const likeResult = await LikePost.countDocuments({
-            user_id: req.session.user.user_id,
+            user_id: req.session.user._id,
             post_id: post.post_id,
         });
 
         // Check if the user has saved the post
         const saveResult = await SavePost.countDocuments({
-            user_id: req.session.user.user_id,
+            user_id: req.session.user._id,
             post_id: post.post_id,
         });
 

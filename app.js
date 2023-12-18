@@ -71,8 +71,10 @@ const createChord = require('./routes/create-chord');
 const createComment = require('./routes/create-comment');
 
 const deleteChord = require('./routes/delete-chord');
+*/
 
 const likesPost = require('./routes/like-post');
+/*
 const likesChord = require('./routes/like-chord');
 
 const savesPost = require('./routes/save-post');
@@ -106,8 +108,9 @@ app.use('/', createChord);
 app.use('/', createComment);
 
 app.use('/', deleteChord);
-
+*/
 app.use('/', likesPost);
+/*
 app.use('/', likesChord);
 
 app.use('/', savesPost);
