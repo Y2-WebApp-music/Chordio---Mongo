@@ -25,7 +25,6 @@ router.post('/login', upload.none(), (req, res) => {
                         console.error(err);
                         return res.status(500).json({ error: 'Internal Server Error' });
                     } else if (isMatch) {
-                        console.log(user)
                         req.session.user = user;
                         return res.status(200).json({ success: 'Login successful' });
                     } else {

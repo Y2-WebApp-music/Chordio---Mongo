@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const app = express();
 
-const Users = require('./model/users');
+const User = require('./model/users');
 const Post = require('./model/post');
 const Chord = require('./model/chord');
 const Comment = require('./model/comments');
@@ -50,29 +50,25 @@ app.use(express.static(__dirname + '/views'));
 
 // Import route files
 const authRoutes = require('./routes/auth');
-
 const curUser = require('./routes/cur-user');
 const otherUser = require('./routes/other-user');
 const otherView = require('./routes/other-view');
 const homeRoutes = require('./routes/home');
-
 const fetchPosts = require('./routes/fetch-post');
 const fetchComments = require('./routes/fetch-comment');
 const fetchChords = require('./routes/fetch-chord');
 const chordView = require('./routes/fetch-chord-view');
-
 const createPost = require('./routes/create-post');
 const createChord = require('./routes/create-chord');
 const createComment = require('./routes/create-comment');
 const deleteChord = require('./routes/delete-chord');
-
 const likesPost = require('./routes/like-post');
 const likesChord = require('./routes/like-chord');
 const savesPost = require('./routes/save-post');
 /*
 const editInfo = require('./routes/edit-user');
-const editPass = require('./routes/edit-pass');
 */
+const editPass = require('./routes/edit-pass');
 const follower = require('./routes/fetch-follow');
 const follow = require('./routes/follow-user');
 
@@ -83,7 +79,6 @@ app.use('/', curUser);
 app.use('/', otherUser);
 app.use('/', otherView);
 app.use('/', homeRoutes);
-
 app.use('/', fetchPosts);
 app.use('/', fetchComments);
 app.use('/', fetchChords);
@@ -97,8 +92,9 @@ app.use('/', likesChord);
 app.use('/', savesPost);
 /*
 app.use('/', editInfo);
-app.use('/', editPass);
 */
+app.use('/', editPass);
+
 app.use('/', follower);
 app.use('/', follow);
 
