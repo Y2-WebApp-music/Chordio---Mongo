@@ -13,13 +13,11 @@ CSS,
 JavaScript
 
 ## Database
-MySQL
+MongoDB
 
 ## Environment Variable
-`DB_HOST` - the base URL of your database.<br>
 `DB_USER` - the database user name.<br>
-`DB_PASSWORD` - the database user password.<br>
-`DB_DATABASE` - the database name.
+`DB_PASSWORD` - the database user password.
 
 ## How to Start:
 -   Clone the repository using git clone `https://github.com/Y2-WebApp-music/Chordio.git`
@@ -28,13 +26,13 @@ MySQL
 
 -   Open folder and navigate to this folder.
 
--   Start your MySQL database tool.
+-   Start your MongoDB database.
 
 -   Create new database using `development.sql` and create .env file.
 
 -   You might need to install a few packages. From here open terminal and do
 ```ruby
-npm i axios bcrypt cookie-session dotenv express multer mysql2 sharp nodemon
+npm i axios bcrypt cookie-session dotenv express multer mongoose sharp nodemon cors
 ```
 
 -   Then do 
